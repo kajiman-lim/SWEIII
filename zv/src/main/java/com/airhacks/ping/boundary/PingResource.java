@@ -9,9 +9,10 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
  *
  * @author airhacks.com
  */
-@Path("ping")
+@Path("java/ping")
 public class PingResource {
 
+    @SuppressWarnings("cdi-ambiguous-dependency")
     @Inject
     @ConfigProperty(name = "message")
     String message;    

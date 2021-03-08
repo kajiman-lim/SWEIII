@@ -1,0 +1,18 @@
+@charset "ISO-8859-1";
+
+body {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+.header{
+	margin: 0 auto;
+	background-color:#212F3D;
+	display: flex;
+  	flex-direction: row;
+  	justify-content: space-between;
+}
+.logo{
+	height: 70px;
+	padding:10px;
+}
