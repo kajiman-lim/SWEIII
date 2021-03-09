@@ -19,7 +19,7 @@ import de.hsb.app.zv.model.ZimmerTyp;
 
 @Named("zimmerHandler")
 public class ZimmerHandler {
-	private DataModel zimmer;
+	private DataModel<Zimmer> zimmer;
 	private Zimmer merkeZimmer;
 	
 	@PersistenceContext(name="zv-persistence-unit")
@@ -73,4 +73,33 @@ public class ZimmerHandler {
 	public String neu() {
 		return "neuesZimmer";
 	}
+	public String viewZimmer() {
+		merkeZimmer = zimmer.getRowData();
+		return "viewZimmer";
+	}
+
+
+
+	public DataModel<Zimmer> getZimmer() {
+		return zimmer;
+	}
+
+
+
+	public void setZimmer(DataModel<Zimmer> zimmer) {
+		this.zimmer = zimmer;
+	}
+
+
+
+	public Zimmer getMerkeZimmer() {
+		return merkeZimmer;
+	}
+
+
+
+	public void setMerkeZimmer(Zimmer merkeZimmer) {
+		this.merkeZimmer = merkeZimmer;
+	}
+	
 }
