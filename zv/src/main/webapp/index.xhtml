@@ -2,33 +2,111 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Hotel Zimmerverwaltung</title>
 	<meta name="viewport" content="initial-scale=1" />
-	<link rel="shortcut icon"  type="image/png" href="img/hzv-logo.png" />
+	<link rel="shortcut icon" type="image/png" href="img/hzv-logo.png" />
 	<link rel="stylesheet" href="css/common.css" type="text/css" />
+	<link rel="stylesheet" href="css/fonts.css" type="text/css" />
+	<style>
+.form {
+	border: 1px solid #5D6D7E;
+	border-radius: 3px;
+	padding: 15px 10px;
+	margin: 10px;
+	font-family: Abel;
+	font-size: 15px;
+}
+
+.date-label {
+	color: white;
+	font-family: Abel;
+}
+
+.date-input {
+	padding: 0px 10px 0px 5px;
+}
+
+.date-input-in {
+	width: 150px;
+}
+
+.search-button {
+	font-family: Abel;
+}
+
+.form-part {
+	display: inline;
+}
+
+.button {
+	cursor: pointer;
+	font-family: Abel;
+}
+
+@media only screen and (max-width: 600px) {
+	.form {
+		width: 100%;
+	}
+	.date-label {
+		display: block;
+		width: 100%;
+	}
+	.date-input, .date-input-in {
+		padding: 0px;
+		padding-bottom: 10px;
+		display: block;
+		width: 100%;
+	}
+	.search-button {
+		margin-top: 15px;
+		width: 100%;
+	}
+}
+</style>
 </h:head>
 <h:body>
 	<div class="header">
 		<div>
-			<img class="logo" src="img/hzv-logo.png" />
+			<a href="index.xhtml"> <img class="logo" src="img/hzv-logo.png" />
+			</a>
 		</div>
-		<div>
-		<h:form classStyle="form">
-			<h:inputText value="Ankunftsdatum" />
-			<h:inputText value="Auskunftdatum" />
-			<h:commandButton action="#" value="Suchen" />
-		</h:form>
+		<div class="form">
+			<h:form>
+				<div class="form-part">
+					<p:outputLabel styleClass="date-label" for="checkIn"
+						value="Check-In" />
+					<p:datePicker inputStyleClass="date-input-in"
+						styleClass="date-input" id="checkIn" />
+				</div>
+				<div class="form-part">
+					<p:outputLabel styleClass="date-label" for="checkOut"
+						value="Check-Out" />
+					<p:datePicker inputStyleClass="date-input-in"
+						styleClass="date-input" id="checkOut" />
+				</div>
+				<div class="form-part">
+					<p:commandButton styleClass="search-button" action="#"
+						value="Suchen" />
+				</div>
+			</h:form>
 		</div>
-		<div>
-			<h:button value="Registrerung"></h:button>
-			<h:button value="Anmelden"></h:button>
+		<div class="regLog">
+			<h:button styleClass="button" value="Registrieren"></h:button>
+			<h:button styleClass="button" value="Anmelden"></h:button>
 		</div>
 	</div>
-	<div class="content">
-	</div>
+	<div class="content">This is content.</div>
 	<div class="footer">
-	</div>>
+		<p>Software Engineering 3, Hotelzimmerverwaltung</p>
+		<p>
+			&copy;
+			2021 Hochschule Bremerhaven | &#10102; Daniel Keil &#10123; Kajiman
+			Chongbang &#10124; Yevhenii Kapuler &#10125; Malte Bothen | Alle
+			Rechte vorbehalten.
+		</p>
+	</div>
 </h:body>
 </html>

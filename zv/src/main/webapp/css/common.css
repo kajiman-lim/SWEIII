@@ -1,6 +1,7 @@
 @charset "ISO-8859-1";
 
 body {
+	font-family:Abel;
 	margin: 0px;
 	padding: 0px;
 	box-sizing: border-box;
@@ -9,10 +10,25 @@ body {
 	margin: 0 auto;
 	background-color:#212F3D;
 	display: flex;
-  	flex-direction: row;
+  	flex-flow: row wrap;
   	justify-content: space-between;
 }
 .logo{
 	height: 70px;
 	padding:10px;
+}
+.content{
+	padding:20px;
+}
+.footer{
+	text-align:center;
+	padding:10px;
+	border-top: 1px solid #B3B6B7;
+	font-size:14px;
+}
+
+@media only screen and (max-width: 900px){
+.header{
+  	justify-content: center;
+}
 }
