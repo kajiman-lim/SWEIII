@@ -1,7 +1,11 @@
 package de.hsb.app.zv.controller;
 
+import java.io.Serializable;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.annotation.FacesConfig;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.inject.Named;
@@ -17,8 +21,10 @@ import javax.transaction.UserTransaction;
 import de.hsb.app.zv.model.Zimmer;
 import de.hsb.app.zv.model.ZimmerTyp;
 
+@FacesConfig
 @Named("zimmerHandler")
-public class ZimmerHandler {
+@SessionScoped
+public class ZimmerHandler implements Serializable{
 	private DataModel<Zimmer> zimmer;
 	private Zimmer merkeZimmer;
 	
@@ -38,7 +44,7 @@ public class ZimmerHandler {
 		} catch (SystemException e) {
 			e.printStackTrace();
 		}
-		ZimmerTyp[] zimmerTypen = ZimmerTyp.getValues();
+		ZimmerTyp[] zimmerTypen = getZimmerTypValues();
 		em.persist(new Zimmer(21, 2, zimmerTypen[1], "Einfaches Doppelzimmer mit 2 Betten"));
 		em.persist(new Zimmer(22, 1, zimmerTypen[0], "Einfaches Einzelzimmer"));
 		em.persist(new Zimmer(23, 1, zimmerTypen[0], "Einfaches Einzelzimmer"));
@@ -80,6 +86,13 @@ public class ZimmerHandler {
 
 
 
+	public ZimmerTyp[] getZimmerTypValues() {
+		return ZimmerTyp.values();
+	}
+	
+	
+	
+	
 	public DataModel<Zimmer> getZimmer() {
 		return zimmer;
 	}
