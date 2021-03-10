@@ -5,7 +5,7 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 
 <h:head>
-	<title><ui:insert name="title">Detailansicht</ui:insert></title>
+	<title><ui:insert name="title">neues Zimmer</ui:insert></title>
 </h:head>
 <h:body>
 	<div id="content">
@@ -24,7 +24,7 @@
 						<h:inputText id="zimmerTyp"
 							value="#{zimmerHandler.merkeZimmer.zimmerTyp}" />
 						<f:selectItems var="form"
-							value="#{zimmerHandler.getZimmerTypValues}" itemValue="#{form}"
+							value="#{zimmerHandler.getZimmerTypValues()}" itemValue="#{form}"
 							itemLabel="#{form.label}" />
 					</h:panelGroup>
 					<h:outputLabel value="Betten:" for="betten" />
@@ -42,6 +42,7 @@
 						<h:message for="beschreibung" styleClass="message" />
 					</h:panelGroup>
 				</h:panelGrid>
+				<h:commandButton action="#{zimmerHandler.speichern()}" value="Speichern" />
 			</h:form>
 		</ui:insert>
 	</div>

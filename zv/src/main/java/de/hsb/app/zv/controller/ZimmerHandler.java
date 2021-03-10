@@ -16,6 +16,7 @@ import javax.transaction.HeuristicRollbackException;
 import javax.transaction.NotSupportedException;
 import javax.transaction.RollbackException;
 import javax.transaction.SystemException;
+import javax.transaction.Transactional;
 import javax.transaction.UserTransaction;
 
 import de.hsb.app.zv.model.Zimmer;
@@ -78,6 +79,13 @@ public class ZimmerHandler implements Serializable{
 	
 	public String neu() {
 		return "neuesZimmer";
+	}
+	@Transactional
+	public String speichern() {
+		merkeZimmer = em.merge(merkeZimmer);
+		em.persist(merkeZimmer);
+		zimmer.setWrappedData(em.createNamedQuery("SelectZimmer").getResultList());
+		return "alleZimmer";
 	}
 	public String viewZimmer() {
 		merkeZimmer = zimmer.getRowData();
