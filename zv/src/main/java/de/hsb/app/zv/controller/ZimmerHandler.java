@@ -1,7 +1,11 @@
 package de.hsb.app.zv.controller;
 
+import java.io.Serializable;
+
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.annotation.FacesConfig;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.inject.Named;
@@ -12,14 +16,17 @@ import javax.transaction.HeuristicRollbackException;
 import javax.transaction.NotSupportedException;
 import javax.transaction.RollbackException;
 import javax.transaction.SystemException;
+import javax.transaction.Transactional;
 import javax.transaction.UserTransaction;
 
 import de.hsb.app.zv.model.Zimmer;
 import de.hsb.app.zv.model.ZimmerTyp;
 
+@FacesConfig
 @Named("zimmerHandler")
-public class ZimmerHandler {
-	private DataModel zimmer;
+@SessionScoped
+public class ZimmerHandler implements Serializable{
+	private DataModel<Zimmer> zimmer;
 	private Zimmer merkeZimmer;
 	
 	@PersistenceContext(name="zv-persistence-unit")
@@ -38,7 +45,7 @@ public class ZimmerHandler {
 		} catch (SystemException e) {
 			e.printStackTrace();
 		}
-		ZimmerTyp[] zimmerTypen = ZimmerTyp.getValues();
+		ZimmerTyp[] zimmerTypen = getZimmerTypValues();
 		em.persist(new Zimmer(21, 2, zimmerTypen[1], "Einfaches Doppelzimmer mit 2 Betten"));
 		em.persist(new Zimmer(22, 1, zimmerTypen[0], "Einfaches Einzelzimmer"));
 		em.persist(new Zimmer(23, 1, zimmerTypen[0], "Einfaches Einzelzimmer"));
@@ -73,4 +80,47 @@ public class ZimmerHandler {
 	public String neu() {
 		return "neuesZimmer";
 	}
+	@Transactional
+	public String speichern() {
+		merkeZimmer = em.merge(merkeZimmer);
+		em.persist(merkeZimmer);
+		zimmer.setWrappedData(em.createNamedQuery("SelectZimmer").getResultList());
+		return "alleZimmer";
+	}
+	public String viewZimmer() {
+		merkeZimmer = zimmer.getRowData();
+		return "viewZimmer";
+	}
+
+
+
+	public ZimmerTyp[] getZimmerTypValues() {
+		return ZimmerTyp.values();
+	}
+	
+	
+	
+	
+	public DataModel<Zimmer> getZimmer() {
+		return zimmer;
+	}
+
+
+
+	public void setZimmer(DataModel<Zimmer> zimmer) {
+		this.zimmer = zimmer;
+	}
+
+
+
+	public Zimmer getMerkeZimmer() {
+		return merkeZimmer;
+	}
+
+
+
+	public void setMerkeZimmer(Zimmer merkeZimmer) {
+		this.merkeZimmer = merkeZimmer;
+	}
+	
 }

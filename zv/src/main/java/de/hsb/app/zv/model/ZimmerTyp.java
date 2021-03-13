@@ -10,7 +10,4 @@ public enum ZimmerTyp {
 	public String getLabel() {
 		return label;
 	}
-	public static ZimmerTyp[] getValues() {
-		return ZimmerTyp.values();
-	}
 }

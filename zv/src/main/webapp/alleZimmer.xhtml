@@ -11,7 +11,24 @@
 	</h:head>
 	<h:body>
 		<div id="content">
-			
+			<ui:insert name="content">
+				<h:dataTable var="zimmer" value="#{zimmerHandler.zimmer}" rowClasses="odd, even" headerClass="header">
+					<f:facet name="header">Zimmer</f:facet>
+					<h:column>
+						<f:facet name="header">Zimmertyp</f:facet>
+						<h:outputText value="#{zimmer.zimmerTyp.label}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Betten</f:facet>
+						<h:outputText value="#{zimmer.betten}" />
+					</h:column>
+					<h:column>
+						<h:form>
+							<h:commandButton action="#{zimmerHandler.viewZimmer()}" value="Detailansicht" />
+						</h:form>
+					</h:column>
+				</h:dataTable>
+			</ui:insert>
 		</div>
 	</h:body>
 </html>
