@@ -6,7 +6,7 @@ body {
 	padding: 0px;
 	box-sizing: border-box;
 }
-.header{
+#header{
 	margin: 0 auto;
 	background-color:#212F3D;
 	display: flex;
@@ -17,10 +17,10 @@ body {
 	height: 70px;
 	padding:10px;
 }
-.content{
+#content{
 	padding:20px;
 }
-.footer{
+#footer{
 	text-align:center;
 	padding:10px;
 	border-top: 1px solid #B3B6B7;
@@ -28,7 +28,7 @@ body {
 }
 
 @media only screen and (max-width: 900px){
-.header{
+#header{
   	justify-content: center;
 }
 }

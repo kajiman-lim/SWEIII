@@ -1,14 +1,11 @@
-<?xml version = "1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
+
 <h:head>
-	<title><ui:insert name="title">Hotel Zimmerverwaltung</ui:insert></title>
-	<meta name="viewport" content="initial-scale=1" />
-	<link rel="shortcut icon" type="image/png" href="img/hzv-logo.png" />
 	<link rel="stylesheet" href="css/common.css" type="text/css" />
 	<link rel="stylesheet" href="css/fonts.css" type="text/css" />
 	<style>
@@ -70,7 +67,6 @@
 </h:head>
 <h:body>
 	<div id="header">
-		<ui:insert name="header">
 			<div>
 				<a href="index.xhtml"> <img class="logo"
 					src="img/hzv-logo.png" />
@@ -100,23 +96,6 @@
 				<h:button styleClass="button" value="Registrieren"></h:button>
 				<h:button styleClass="button" value="Anmelden"></h:button>
 			</div>
-		</ui:insert>
-	</div>
-	<div id="content">
-		<ui:insert name="content">
-	This is content.
-	</ui:insert>
-	</div>
-	<div id="footer">
-		<ui:insert name="footer">
-			<p>Software Engineering 3, Hotelzimmerverwaltung</p>
-			<p>
-				&copy;
-				2021 Hochschule Bremerhaven | &#10102; Daniel Keil &#10123; Kajiman
-				Chongbang &#10124; Yevhenii Kapuler &#10125; Malte Bothen | Alle
-				Rechte vorbehalten.
-			</p>
-		</ui:insert>
 	</div>
 </h:body>
 </html>
