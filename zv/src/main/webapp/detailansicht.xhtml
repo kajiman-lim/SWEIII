@@ -1,38 +1,38 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
 
-	<h:head>
-		<title>
-			<ui:insert name="title">Zimmerliste</ui:insert>
-		</title>
-	</h:head>
-	<h:body>
-		<div id="content">
-			<ui:insert name="content">
-				<h:dataTable var="zimmer" value="#{zimmerHandler.zimmer}" rowClasses="odd, even" headerClass="header">
-					<f:facet name="header">Zimmer</f:facet>
-					<h:column>
-						<f:facet name="header">Zimmernummer</f:facet>
-						<h:outputText value="#{zimmer.nummer}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">Zimmertyp</f:facet>
-						<h:outputText value="#{zimmer.typ.label}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">Betten</f:facet>
-						<h:outputText value="#{zimmer.betten}" />
-					</h:column>
-				</h:dataTable>
-				<f:facet name="header">Beschreibung</f:facet>
-				<h:outputText value="#{zimmer.betten}" />
-				<h:form>
-					<h:commandButton action="#{zimmerHandler.back()}" value="Zurück" />
-				</h:form>
-			</ui:insert>
-		</div>
-	</h:body>
+<h:head>
+	<title><ui:insert name="title">Zimmerliste</ui:insert></title>
+</h:head>
+<h:body>
+	<div id="content">
+		<h:panelGrid columns="2" headerClass="header" footerClass="footer">
+			<h:outputLabel value="Zimmernummer:" for="nummer" />
+			<h:panelGroup>
+				<h:outputText id="nummer"
+					value="#{zimmerHandler.merkeZimmer.nummer}" />
+			</h:panelGroup>
+			<h:outputLabel value="Zimmertyp:" for="typ" />
+			<h:panelGroup>
+				<h:outputText id="typ"
+					value="#{zimmerHandler.merkeZimmer.typ.label}" />
+			</h:panelGroup>
+			<h:outputLabel value="Betten:" for="betten" />
+			<h:panelGroup>
+				<h:outputText id="betten" value="#{zimmerHandler.merkeZimmer.betten}" />
+			</h:panelGroup>
+			<h:outputLabel value="Beschreibung:" for="beschreibung" />
+			<h:panelGroup>
+				<h:outputText id="beschreibung"
+					value="#{zimmerHandler.merkeZimmer.beschreibung}" />
+			</h:panelGroup>
+		</h:panelGrid>
+		<h:form>
+			<h:commandButton action="#{zimmerHandler.back(false)}" value="Zurück" />
+		</h:form>
+	</div>
+</h:body>
 </html>

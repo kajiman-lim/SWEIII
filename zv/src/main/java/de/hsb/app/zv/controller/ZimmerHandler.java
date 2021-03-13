@@ -1,6 +1,7 @@
 package de.hsb.app.zv.controller;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -18,7 +19,6 @@ import javax.transaction.RollbackException;
 import javax.transaction.SystemException;
 import javax.transaction.Transactional;
 import javax.transaction.UserTransaction;
-
 import de.hsb.app.zv.model.Zimmer;
 import de.hsb.app.zv.model.ZimmerTyp;
 
@@ -28,6 +28,7 @@ import de.hsb.app.zv.model.ZimmerTyp;
 public class ZimmerHandler implements Serializable{
 	private DataModel<Zimmer> zimmer;
 	private Zimmer merkeZimmer;
+	private List<Zimmer> zimmerList;
 	
 	@PersistenceContext(name="zv-persistence-unit")
 	private EntityManager em;
@@ -74,6 +75,8 @@ public class ZimmerHandler implements Serializable{
 		} catch (SystemException e) {
 			e.printStackTrace();
 		}
+		zimmerList = em.createNamedQuery("SelectZimmer").getResultList();
+		
 	}
 	
 	
@@ -113,8 +116,8 @@ public class ZimmerHandler implements Serializable{
 		}
 	}
 
-
-
+	
+	
 	public ZimmerTyp[] getZimmerTypValues() {
 		return ZimmerTyp.values();
 	}
@@ -143,5 +146,4 @@ public class ZimmerHandler implements Serializable{
 	public void setMerkeZimmer(Zimmer merkeZimmer) {
 		this.merkeZimmer = merkeZimmer;
 	}
-	
 }
