@@ -50,11 +50,12 @@ public class ZimmerHandler implements Serializable{
 		em.persist(new Zimmer(22, 1, zimmerTypen[0], "Einfaches Einzelzimmer"));
 		em.persist(new Zimmer(23, 1, zimmerTypen[0], "Einfaches Einzelzimmer"));
 		em.persist(new Zimmer(24, 1, zimmerTypen[1], "Einfaches Doppelzimmer mit Doppelbett"));
-		em.persist(new Zimmer(31, 2, zimmerTypen[3], "Luxuriöses Doppelzimmer mit 2 Betten"));
-		em.persist(new Zimmer(32, 1, zimmerTypen[2], "Luxuriöses Einzelzimmer"));
-		em.persist(new Zimmer(33, 1, zimmerTypen[2], "Luxuriöses Einzelzimmer mit Blick auf die braune Weser"));
-		em.persist(new Zimmer(34, 2, zimmerTypen[3], "Luxuriöses Doppelzimmer mit Doppelbett und Blick auf die braune Weser"));
-		em.persist(new Zimmer(41, 2, zimmerTypen[4], "Prunkvolle Präsidentensuite mit individueller Ausstattung"));
+		em.persist(new Zimmer(25, 3, zimmerTypen[2], "Einfaches Familienzimmer mit einem Doppelbett und zwei Einzelbetten"));
+		em.persist(new Zimmer(31, 2, zimmerTypen[4], "Luxuriöses Doppelzimmer mit 2 Betten"));
+		em.persist(new Zimmer(32, 1, zimmerTypen[3], "Luxuriöses Einzelzimmer"));
+		em.persist(new Zimmer(33, 1, zimmerTypen[3], "Luxuriöses Einzelzimmer mit Blick auf die braune Weser"));
+		em.persist(new Zimmer(34, 2, zimmerTypen[4], "Luxuriöses Doppelzimmer mit Doppelbett und Blick auf die braune Weser"));
+		em.persist(new Zimmer(41, 2, zimmerTypen[5], "Prunkvolle Präsidentensuite mit individueller Ausstattung"));
 		
 		zimmer = new ListDataModel<>();
 		zimmer.setWrappedData(em.createNamedQuery("SelectZimmer").getResultList());
@@ -77,19 +78,39 @@ public class ZimmerHandler implements Serializable{
 	
 	
 	
-	public String neu() {
+	public String newZimmer() {
 		return "neuesZimmer";
 	}
 	@Transactional
-	public String speichern() {
+	public String save() {
 		merkeZimmer = em.merge(merkeZimmer);
 		em.persist(merkeZimmer);
 		zimmer.setWrappedData(em.createNamedQuery("SelectZimmer").getResultList());
 		return "alleZimmer";
 	}
+	@Transactional
+	public String edit() {
+		merkeZimmer = zimmer.getRowData();
+		return "neuesZimmer";
+	}
+	@Transactional
+	public String delete() {
+		merkeZimmer = zimmer.getRowData();
+		merkeZimmer = em.merge(merkeZimmer);
+		em.remove(merkeZimmer);
+		zimmer.setWrappedData(em.createNamedQuery("SelectZimmer").getResultList());
+		return "admin_alleZimmer";
+	}
 	public String viewZimmer() {
 		merkeZimmer = zimmer.getRowData();
-		return "viewZimmer";
+		return "detailansicht";
+	}
+	public String back(boolean admin) {
+		if(admin) {
+			return "admin_alleZimmer";
+		}else {
+			return "alleZimmer";
+		}
 	}
 
 
