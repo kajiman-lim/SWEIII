@@ -1,34 +1,35 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
-	<h:head>
-		<title>
-			<ui:insert name="title">Zimmerliste</ui:insert>
-		</title>
-	</h:head>
-	<h:body>
-		<div id="content">
-			<ui:insert name="content">
-				<h:dataTable var="zimmer" value="#{zimmerHandler.zimmer}" rowClasses="odd, even" headerClass="header">
-					<f:facet name="header">Zimmer</f:facet>
-					<h:column>
-						<f:facet name="header">Zimmertyp</f:facet>
-						<h:outputText value="#{zimmer.zimmerTyp.label}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">Betten</f:facet>
-						<h:outputText value="#{zimmer.betten}" />
-					</h:column>
-					<h:column>
-						<h:form>
-							<h:commandButton action="#{zimmerHandler.viewZimmer()}" value="Detailansicht" />
-						</h:form>
-					</h:column>
-				</h:dataTable>
-			</ui:insert>
-		</div>
-	</h:body>
+<h:head>
+	<title><ui:insert name="title">Zimmerliste</ui:insert></title>
+</h:head>
+<h:body>
+	<div id="content">
+		<ui:insert name="content">
+			<p:dataTable var="zimmer" value="#{zimmerHandler.zimmer}"
+				rowClasses="odd, even" headerClass="header">
+				<f:facet name="header">Zimmer</f:facet>
+				<p:column filterBy="#{zimmer.typ.label}">
+					<f:facet name="header">Zimmertyp</f:facet>
+					<h:outputText value="#{zimmer.typ.label}" />
+				</p:column>
+				<p:column filterBy="#{zimmer.betten}" sortBy="#{zimmer.betten}">
+					<f:facet name="header">Betten</f:facet>
+					<h:outputText value="#{zimmer.betten}" />
+				</p:column>
+				<p:column>
+					<h:form>
+						<h:commandButton action="#{zimmerHandler.viewZimmer()}"
+							value="Detailansicht" />
+					</h:form>
+				</p:column>
+			</p:dataTable>
+		</ui:insert>
+	</div>
+</h:body>
 </html>

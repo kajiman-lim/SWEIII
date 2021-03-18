@@ -19,13 +19,14 @@
 							required="true" requiredMessage="Eingabe fehlt" />
 						<h:message for="nummer" styleClass="message" />
 					</h:panelGroup>
-					<h:outputLabel value="Zimmertyp:" for="zimmerTyp" />
+					<h:outputLabel value="Zimmertyp:" for="typ" />
 					<h:panelGroup>
-						<h:inputText id="zimmerTyp"
-							value="#{zimmerHandler.merkeZimmer.zimmerTyp}" />
-						<f:selectItems var="form"
-							value="#{zimmerHandler.getZimmerTypValues()}" itemValue="#{form}"
-							itemLabel="#{form.label}" />
+						<h:selectOneMenu id="typ"
+							value="#{zimmerHandler.merkeZimmer.typ}">
+							<f:selectItems var="form"
+								value="#{zimmerHandler.getZimmerTypValues()}" itemValue="#{form}"
+								itemLabel="#{form.label}" />
+						</h:selectOneMenu>
 					</h:panelGroup>
 					<h:outputLabel value="Betten:" for="betten" />
 					<h:panelGroup>
@@ -42,7 +43,10 @@
 						<h:message for="beschreibung" styleClass="message" />
 					</h:panelGroup>
 				</h:panelGrid>
-				<h:commandButton action="#{zimmerHandler.speichern()}" value="Speichern" />
+				<h:commandButton action="#{zimmerHandler.save()}" value="Speichern" />
+			</h:form>
+			<h:form>
+				<h:commandButton action="#{zimmerHandler.back(true)}" value="Zurück" />
 			</h:form>
 		</ui:insert>
 	</div>
