@@ -108,12 +108,8 @@ public class ZimmerHandler implements Serializable{
 		merkeZimmer = zimmer.getRowData();
 		return "detailansicht";
 	}
-	public String back(boolean admin) {
-		if(admin) {
-			return "admin_alleZimmer";
-		}else {
+	public String back() {
 			return "alleZimmer";
-		}
 	}
 
 	
