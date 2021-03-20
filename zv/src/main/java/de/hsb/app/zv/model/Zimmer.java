@@ -17,14 +17,15 @@ public class Zimmer implements Serializable {
 	private UUID id;
 	private int nummer;
 	private int betten;
-	private ZimmerTyp typ;
+	private ZimmerTyp zimmerTyp;
 	private String beschreibung;
 	
+	
 	public Zimmer(){}
-	public Zimmer(int nummer, int betten, ZimmerTyp typ, String beschreibung) {
+	public Zimmer(int nummer, int betten, ZimmerTyp zimmerTyp, String beschreibung) {
 		this.nummer = nummer;
 		this.betten = betten;
-		this.typ = typ;
+		this.zimmerTyp = zimmerTyp;
 		this.beschreibung = beschreibung;
 	}
 
@@ -52,12 +53,12 @@ public class Zimmer implements Serializable {
 		this.betten = betten;
 	}
 
-	public ZimmerTyp getTyp() {
-		return typ;
+	public ZimmerTyp getZimmerTyp() {
+		return zimmerTyp;
 	}
 
 	public void setZimmerTyp(ZimmerTyp zimmerTyp) {
-		this.typ = typ;
+		this.zimmerTyp = zimmerTyp;
 	}
 
 	public String getBeschreibung() {

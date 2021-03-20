@@ -22,10 +22,10 @@
 					<h:outputLabel value="Zimmertyp:" for="typ" />
 					<h:panelGroup>
 						<h:selectOneMenu id="typ"
-							value="#{zimmerHandler.merkeZimmer.typ}">
+							value="#{zimmerHandler.merkeZimmer.zimmerTyp}">
 							<f:selectItems var="form"
-								value="#{zimmerHandler.getZimmerTypValues()}" itemValue="#{form}"
-								itemLabel="#{form.label}" />
+								value="#{zimmerHandler.getZimmerTypValues()}"
+								itemValue="#{form}" itemLabel="#{form.label}" />
 						</h:selectOneMenu>
 					</h:panelGroup>
 					<h:outputLabel value="Betten:" for="betten" />
@@ -38,8 +38,8 @@
 					<h:outputLabel value="Beschreibung:" for="beschreibung" />
 					<h:panelGroup>
 						<h:inputText id="beschreibung"
-							value="#{zimmerHandler.merkeZimmer.beschreibung}"
-							required="true" requiredMessage="Eingabe fehlt" />
+							value="#{zimmerHandler.merkeZimmer.beschreibung}" required="true"
+							requiredMessage="Eingabe fehlt" />
 						<h:message for="beschreibung" styleClass="message" />
 					</h:panelGroup>
 				</h:panelGrid>

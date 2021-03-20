@@ -14,9 +14,9 @@
 			<p:dataTable var="zimmer" value="#{zimmerHandler.zimmer}"
 				rowClasses="odd, even" headerClass="header">
 				<f:facet name="header">Zimmer</f:facet>
-				<p:column filterBy="#{zimmer.typ.label}">
+				<p:column filterBy="#{zimmer.zimmerTyp.label}">
 					<f:facet name="header">Zimmertyp</f:facet>
-					<h:outputText value="#{zimmer.typ.label}" />
+					<h:outputText value="#{zimmer.zimmerTyp.label}" />
 				</p:column>
 				<p:column filterBy="#{zimmer.betten}" sortBy="#{zimmer.betten}">
 					<f:facet name="header">Betten</f:facet>
