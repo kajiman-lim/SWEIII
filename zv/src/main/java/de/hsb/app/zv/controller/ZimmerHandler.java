@@ -26,6 +26,7 @@ import de.hsb.app.zv.model.ZimmerTyp;
 @SessionScoped
 public class ZimmerHandler implements Serializable{
 	private DataModel<Zimmer> zimmer;
+	private DataModel<Zimmer> filteredZimmer;
 	private Zimmer merkeZimmer;
 	
 	@PersistenceContext(name="zv-persistence-unit")
@@ -106,6 +107,11 @@ public class ZimmerHandler implements Serializable{
 	}
 	public String back() {
 			return "alleZimmer";
+	}
+	public String filter(String column, String value) {
+		filteredZimmer = zimmer;
+		filteredZimmer.setWrappedData(em.createQuery("Select z from Zimmer z where betten=2").getResultList());
+		return "gefilterteZimmer";
 	}
 
 	
