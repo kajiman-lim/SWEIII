@@ -34,6 +34,9 @@ public class KundenHandler implements Serializable{
 	@PostConstruct
 	public void init() {
 		em.persist(new Kunde("Herr", "Yevhenii", "Kapuler", new GregorianCalendar(1999, 3, 19).getTime(), "+491600000000", "Heider Ring 10", "27777 Ganderkesee"));
+		em.persist(new Kunde("Herr", "Yevhenii", "Kapuler", new GregorianCalendar(1999, 3, 19).getTime(), "+491600000000", "Heider Ring 10", "27777 Ganderkesee"));
+		em.persist(new Kunde("Herr", "Yevhenii", "Kapuler", new GregorianCalendar(1999, 3, 19).getTime(), "+491600000000", "Heider Ring 10", "27777 Ganderkesee"));
+		em.persist(new Kunde("Herr", "Yevhenii", "Kapuler", new GregorianCalendar(1999, 3, 19).getTime(), "+491600000000", "Heider Ring 10", "27777 Ganderkesee"));
 		kunden= new ListDataModel<>();
 		kunden.setWrappedData(em.createNamedQuery("SelectKunden").getResultList());
 	}
