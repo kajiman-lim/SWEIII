@@ -11,16 +11,16 @@
 <h:body>
 	<div id="content">
 		<ui:insert name="content">
-			<p:dataTable id="dtZimmer" var="zimmer" value="#{zimmerHandler.zimmer}"
+			<p:dataTable var="filteredZimmer" value="#{zimmerHandler.filteredZimmer}"
 				rowClasses="odd, even" headerClass="header">
 				<f:facet name="header">Zimmer</f:facet>
-				<p:column filterBy="#{zimmer.zimmerTyp.label}" filterMatchMode="contains">
+				<p:column filterBy="#{filteredZimmer.zimmerTyp.label}" filterMatchMode="contains">
 					<f:facet name="header">Zimmertyp</f:facet>
-					<h:outputText value="#{zimmer.zimmerTyp.label}" />
+					<h:outputText value="#{filteredZimmer.zimmerTyp.label}" />
 				</p:column>
-				<p:column filterBy="#{zimmer.betten}" filterMatchMode="exact" sortBy="#{zimmer.betten}">
+				<p:column filterBy="#{filteredZimmer.betten}" filterMatchMode="exact" sortBy="#{filteredZimmer.betten}">
 					<f:facet name="header">Betten</f:facet>
-					<h:outputText value="#{zimmer.betten}" />
+					<h:outputText value="#{filteredZimmer.betten}" />
 				</p:column>
 				<p:column>
 					<h:form>
@@ -29,9 +29,6 @@
 					</h:form>
 				</p:column>
 			</p:dataTable>
-			<h:form>
-				<h:commandButton action="#{zimmerHandler.filter(betten, 2)}" /> 
-			</h:form>
 		</ui:insert>
 	</div>
 </h:body>

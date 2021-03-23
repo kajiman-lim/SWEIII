@@ -16,7 +16,7 @@
 					<f:facet name="header">Zimmer</f:facet>
 					<h:column>
 						<f:facet name="header">Zimmertyp</f:facet>
-						<h:outputText value="#{zimmer.typ.label}" />
+						<h:outputText value="#{zimmer.zimmerTyp.label}" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">Betten</f:facet>
@@ -38,6 +38,9 @@
 						</h:form>
 					</h:column>
 				</h:dataTable>
+				<h:form>
+					<h:commandButton action="#{zimmerHandler.newZimmer()}" value="neues Zimmer" />
+				</h:form>
 			</ui:insert>
 		</div>
 	</h:body>
