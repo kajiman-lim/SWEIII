@@ -18,7 +18,7 @@ public class Reservierung implements Serializable {
 	private Kunde kunde;
 	private Zimmer zimmer;
 	
-	Reservierung(Zimmer zimmer) {
+	public Reservierung(Zimmer zimmer) {
 		this.zimmer=zimmer;
 	}
 }
