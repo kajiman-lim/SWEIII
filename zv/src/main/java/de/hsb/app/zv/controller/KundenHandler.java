@@ -1,7 +1,6 @@
 package de.hsb.app.zv.controller;
 
 import java.io.Serializable;
-import java.text.ParseException;
 import java.util.GregorianCalendar;
 
 import javax.annotation.PostConstruct;
@@ -29,9 +28,8 @@ public class KundenHandler implements Serializable{
 	private DataModel<Kunde> kunden;
 	private Kunde merkeKunde= new Kunde();
 	
-	@PersistenceContext(name = "zv-persistence-unit")
+	@PersistenceContext(name="zv-persistence-unit")
 	private EntityManager em;
-	
 	@Resource
 	private UserTransaction utx;
 
