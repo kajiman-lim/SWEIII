@@ -17,7 +17,7 @@ public class Reservierung implements Serializable {
 	private UUID id;
 	private Kunde kunde;
 	private Zimmer zimmer;
-	
+	// 01010101
 	public Reservierung(Zimmer zimmer) {
 		this.zimmer=zimmer;
 	}
