@@ -11,27 +11,24 @@
 <h:body>
 	<div id="content">
 		<ui:insert name="content">
-			<p:dataTable var="zimmer" value="#{zimmerHandler.zimmer}" filteredValue="#{zimmerHandler.filteredZimmer}"
-				rowClasses="odd, even" headerClass="header">
-				<f:facet name="header">Zimmer</f:facet>
-				<p:column sortBy="#{zimmer.zimmerTyp.label}" filterBy="#{zimmer.zimmerTyp.label}" filterMatchMode="contains">
-					<f:facet name="header">Zimmertyp</f:facet>
-					<h:outputText value="#{zimmer.zimmerTyp.label}" />
-				</p:column>
-				<p:column  sortBy="#{zimmer.betten}" filterBy="#{zimmer.betten}" filterMatchMode="exact">
-					<f:facet name="header">Betten</f:facet>
-					<h:outputText value="#{zimmer.betten}" />
-				</p:column>
-				<p:column>
-					<h:form>
+			<h:form>
+				<p:dataTable var="zimmer" value="#{zimmerHandler.zimmer}" filteredValue="#{zimmerHandler.filteredZimmer}"
+					rowClasses="odd, even" headerClass="header">
+					<f:facet name="header">Zimmer</f:facet>
+					<p:column sortBy="#{zimmer.zimmerTyp.label}" filterBy="#{zimmer.zimmerTyp.label}" filterMatchMode="contains">
+						<f:facet name="header">Zimmertyp</f:facet>
+						<h:outputText value="#{zimmer.zimmerTyp.label}" />
+					</p:column>
+					<p:column  sortBy="#{zimmer.betten}" filterBy="#{zimmer.betten}" filterMatchMode="exact">
+						<f:facet name="header">Betten</f:facet>
+						<h:outputText value="#{zimmer.betten}" />
+					</p:column>
+					<p:column>
 						<h:commandButton action="#{zimmerHandler.viewZimmer()}"
 							value="Detailansicht" />
-					</h:form>
-				</p:column>
-			</p:dataTable>
-			<h:form>
-				<h:commandButton action="#{zimmerHandler.filter(betten, 2)}" /> 
-			</h:form>
+					</p:column>
+				</p:dataTable>
+		</h:form>
 		</ui:insert>
 	</div>
 </h:body>

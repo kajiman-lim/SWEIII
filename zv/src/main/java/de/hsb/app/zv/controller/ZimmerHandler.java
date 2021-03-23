@@ -82,6 +82,7 @@ public class ZimmerHandler implements Serializable{
 	
 	
 	public String newZimmer() {
+		merkeZimmer = new Zimmer();
 		return "neuesZimmer";
 	}
 	@Transactional
