@@ -1,6 +1,8 @@
 package de.hsb.app.zv.model;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.enterprise.context.RequestScoped;
@@ -24,12 +26,25 @@ public class Kreditkarte implements Serializable {
 	private String inhaber;
 	
 	public Kreditkarte() {};
-	/*public Kreditkarte(Kreditkartentyp typ, String nummer, Date gueltigBis, String inhaber) {
+	public Kreditkarte(Kreditkartentyp typ, String nummer, Date gueltigBis, String inhaber) {
 		this.typ = typ;
 		this.nummer = nummer;
 		this.gueltigBis = gueltigBis;
 		this.inhaber = inhaber;
-	}*/
+	}
+	public Kreditkarte(Kreditkartentyp typ, String nummer, String gueltigBis, String inhaber) {
+		this.typ = typ;
+		this.nummer = nummer;
+		SimpleDateFormat format = new SimpleDateFormat("MM/yy");
+		Date date = null;
+		try {
+			date = format.parse(gueltigBis);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		this.gueltigBis = date;
+		this.inhaber = inhaber;
+	}
 	public int getId() {
 		return id;
 	}

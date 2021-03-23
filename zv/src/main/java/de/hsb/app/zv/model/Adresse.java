@@ -20,6 +20,11 @@ public class Adresse {
 	private String ort;
 	
 	public Adresse() {}
+	public Adresse(String strasse, String plz, String ort) {
+		this.strasse = strasse;
+		this.plz = plz;
+		this.ort = ort;
+	}
 
 	public Integer getId() {
 		return id;

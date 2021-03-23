@@ -19,40 +19,32 @@ public class Kunde implements Serializable {
 	
 	@Id @GeneratedValue
 	private UUID kId;
-	private String Anrede;
+	private Anrede anrede;
 	private String vorname;
 	private String nachname;	
 	
 	@Temporal(TemporalType.DATE)
 	private Date geburtsdatum;	
 	private String telNummer;	
-	private String strasse;	
-	private String stadt;
+	private Adresse adresse;
+	private Kreditkarte kreditkarte;
 
-	public Kunde() {
-		
+	public Kunde() {}
+	public Kunde(Adresse adresse, Kreditkarte kreditkarte) {
+		this.adresse = adresse;
+		this.kreditkarte = kreditkarte;
 	}
-	
-	public Kunde(String anrede, String vorname, String nachname, Date geburtsdatum, String telNummer,
-			String strasse, String stadt) {
+	public Kunde(Anrede anrede, String vorname, String nachname, Date geburtsdatum, String telNummer, Adresse adresse, Kreditkarte kreditkarte) {
 		super();
-		Anrede = anrede;
+		this.anrede = anrede;
 		this.vorname = vorname;
 		this.nachname = nachname;
 		this.geburtsdatum = geburtsdatum;
 		this.telNummer = telNummer;
-		this.strasse = strasse;
-		this.stadt = stadt;
+		this.adresse = adresse;
+		this.kreditkarte = kreditkarte;
 	}
 	
-	public String getAnrede() {
-		return Anrede;
-	}
-
-	public void setAnrede(String anrede) {
-		Anrede = anrede;
-	}
-
 	public String getVorname() {
 		return vorname;
 	}
@@ -84,23 +76,6 @@ public class Kunde implements Serializable {
 	public void setTelNummer(String telNummer) {
 		this.telNummer = telNummer;
 	}
-
-	public String getStrasse() {
-		return strasse;
-	}
-
-	public void setStrasse(String strasse) {
-		this.strasse = strasse;
-	}
-
-	public String getStadt() {
-		return stadt;
-	}
-
-	public void setStadt(String stadt) {
-		this.stadt = stadt;
-	}
-
 	public UUID getkId() {
 		return kId;
 	}
@@ -108,6 +83,25 @@ public class Kunde implements Serializable {
 	public void setkId(UUID kId) {
 		this.kId = kId;
 	}
+	public Anrede getAnrede() {
+		return anrede;
+	}
+	public void setAnrede(Anrede anrede) {
+		this.anrede = anrede;
+	}
+	public Adresse getAdresse() {
+		return adresse;
+	}
+	public void setAdresse(Adresse adresse) {
+		this.adresse = adresse;
+	}
+	public Kreditkarte getKreditkarte() {
+		return kreditkarte;
+	}
+	public void setKreditkarte(Kreditkarte kreditkarte) {
+		this.kreditkarte = kreditkarte;
+	}
+	
 	
 	
 	
