@@ -5,30 +5,36 @@ import java.util.Date;
 import java.util.UUID;
 
 import javax.faces.annotation.FacesConfig;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @FacesConfig
 @NamedQuery(name="SelectKunden", query="Select k from Kunde k")
+@NamedQuery(name = "SearchKunden", query = "SELECT k FROM Kunde k WHERE k.user.username = ?1 AND k.user.password = ?2")
+@NamedQuery(name = "SessionKunde", query = "SELECT k FROM Kunde k WHERE k.user.username = ?1 AND k.user.password = ?2")
 @Entity
 public class Kunde implements Serializable {
-	
+	private static final long serialVersionUID = 1L;
 	@Id @GeneratedValue
 	private UUID kId;
 	private Anrede anrede;
 	private String vorname;
 	private String nachname;	
-	
 	@Temporal(TemporalType.DATE)
 	private Date geburtsdatum;	
 	private String telNummer;	
 	private Adresse adresse;
 	private Kreditkarte kreditkarte;
-
+	@OneToOne(cascade=CascadeType.ALL)
+	private Benutzer user; 
+	
+	
 	public Kunde() {}
 	public Kunde(Adresse adresse, Kreditkarte kreditkarte) {
 		this.adresse = adresse;
@@ -45,6 +51,17 @@ public class Kunde implements Serializable {
 		this.kreditkarte = kreditkarte;
 	}
 	
+	public Kunde(Anrede anrede, String vorname, String nachname, Date geburtsdatum, String telNummer, Adresse adresse,
+			Kreditkarte kreditkarte, Benutzer user) {
+		this.anrede = anrede;
+		this.vorname = vorname;
+		this.nachname = nachname;
+		this.geburtsdatum = geburtsdatum;
+		this.telNummer = telNummer;
+		this.adresse = adresse;
+		this.kreditkarte = kreditkarte;
+		this.user = user;
+	}
 	public String getVorname() {
 		return vorname;
 	}
@@ -101,9 +118,10 @@ public class Kunde implements Serializable {
 	public void setKreditkarte(Kreditkarte kreditkarte) {
 		this.kreditkarte = kreditkarte;
 	}
-	
-	
-	
-	
-	
+	public Benutzer getUser() {
+		return user;
+	}
+	public void setUser(Benutzer user) {
+		this.user = user;
+	}
 }
