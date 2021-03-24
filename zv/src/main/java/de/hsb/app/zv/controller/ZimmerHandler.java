@@ -1,6 +1,7 @@
 package de.hsb.app.zv.controller;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -18,6 +19,8 @@ import javax.transaction.RollbackException;
 import javax.transaction.SystemException;
 import javax.transaction.Transactional;
 import javax.transaction.UserTransaction;
+
+import de.hsb.app.zv.model.Reservierung;
 import de.hsb.app.zv.model.Zimmer;
 import de.hsb.app.zv.model.ZimmerTyp;
 
@@ -26,7 +29,7 @@ import de.hsb.app.zv.model.ZimmerTyp;
 @SessionScoped
 public class ZimmerHandler implements Serializable{
 	private DataModel<Zimmer> zimmer;
-	private DataModel<Zimmer> filteredZimmer;
+	private List<Zimmer> filteredZimmer;
 	private Zimmer merkeZimmer;
 	
 	@PersistenceContext(name="zv-persistence-unit")
@@ -79,6 +82,7 @@ public class ZimmerHandler implements Serializable{
 	
 	
 	public String newZimmer() {
+		merkeZimmer = new Zimmer();
 		return "neuesZimmer";
 	}
 	@Transactional
@@ -88,7 +92,6 @@ public class ZimmerHandler implements Serializable{
 		zimmer.setWrappedData(em.createNamedQuery("SelectZimmer").getResultList());
 		return "alleZimmer";
 	}
-	@Transactional
 	public String edit() {
 		merkeZimmer = zimmer.getRowData();
 		return "neuesZimmer";
@@ -106,13 +109,13 @@ public class ZimmerHandler implements Serializable{
 		return "detailansicht";
 	}
 	public String back() {
-			return "alleZimmer";
+		return "alleZimmer";
 	}
-	public String filter(String column, String value) {
-		filteredZimmer = zimmer;
-		filteredZimmer.setWrappedData(em.createQuery("Select z from Zimmer z where betten=2").getResultList());
-		return "gefilterteZimmer";
+	public String reservieren() {
+		Reservierung reservierung = new Reservierung(merkeZimmer);
+		return "reservierungen";
 	}
+
 
 	
 	
@@ -138,10 +141,23 @@ public class ZimmerHandler implements Serializable{
 	public Zimmer getMerkeZimmer() {
 		return merkeZimmer;
 	}
-
-
-
+	
+	
+	
 	public void setMerkeZimmer(Zimmer merkeZimmer) {
 		this.merkeZimmer = merkeZimmer;
 	}
+
+
+
+	public List<Zimmer> getFilteredZimmer() {
+		return filteredZimmer;
+	}
+
+
+
+	public void setFilteredZimmer(List<Zimmer> filteredZimmer) {
+		this.filteredZimmer = filteredZimmer;
+	}
+	
 }

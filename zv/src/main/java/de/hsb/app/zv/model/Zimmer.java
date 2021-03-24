@@ -19,7 +19,7 @@ public class Zimmer implements Serializable {
 	private int betten;
 	private ZimmerTyp zimmerTyp;
 	private String beschreibung;
-	
+	private boolean reserviert;
 	
 	public Zimmer(){}
 	public Zimmer(int nummer, int betten, ZimmerTyp zimmerTyp, String beschreibung) {
