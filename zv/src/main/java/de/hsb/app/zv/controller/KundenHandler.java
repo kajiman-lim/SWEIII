@@ -24,7 +24,7 @@ import de.hsb.app.zv.model.Kunde;
 @Named("kundenHandler")
 @SessionScoped
 public class KundenHandler implements Serializable{
-
+	private static final long serialVersionUID = 1L;
 	private DataModel<Kunde> kunden;
 	private Kunde merkeKunde= new Kunde();
 	

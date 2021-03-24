@@ -28,6 +28,7 @@ import de.hsb.app.zv.model.ZimmerTyp;
 @Named("zimmerHandler")
 @SessionScoped
 public class ZimmerHandler implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private DataModel<Zimmer> zimmer;
 	private List<Zimmer> filteredZimmer;
 	private Zimmer merkeZimmer;
@@ -109,7 +110,7 @@ public class ZimmerHandler implements Serializable{
 		return "detailansicht";
 	}
 	public String back() {
-		return "alleZimmer";
+		return "admin_alleZimmer";
 	}
 	public String reservieren() {
 		Reservierung reservierung = new Reservierung(merkeZimmer);
