@@ -1,21 +1,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
-	<h:head>
-		<f:metadata>
-			
-		</f:metadata>
-	</h:head>
-	<h:body>
-		<div id="header">
-			<ui:insert name="header">
-			
-			</ui:insert>
-		</div>
-		<div id="content">
-			<ui:insert name="content">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<f:metadata>
+
+	</f:metadata>
+</h:head>
+<h:body>
+	<div id="header">
+		<ui:insert name="header">
+
+		</ui:insert>
+	</div>
+	<div id="content">
+		<ui:insert name="content">
 			<h:form>
 				<h:panelGrid columns="2" headerClass="header" footerClass="footer">
 					<h:outputLabel value="Anrede:" for="anrede" />
@@ -56,14 +56,14 @@
 			<h:form>
 				<h:panelGrid>
 					<h:outputLabel value="Typ" for="typ" />
-					<h:panelGrid styleClass="col-2">
+					<h:panelGroup styleClass="col-2">
 						<h:selectOneMenu id="typ"
 							value="#{kundenHandler.merkeKunde.kreditkarte.typ}">
 							<f:selectItems var="form"
 								value="#{kundenHandler.kreditkartentypValues}"
 								itemValue="#{form}" itemLabel="#{form.label}" />
 						</h:selectOneMenu>
-					</h:panelGrid>
+					</h:panelGroup>
 					<h:outputLabel value="Nummer" for="nummer" />
 					<h:panelGroup styleClass="col-2">
 						<h:inputText id="nummer" required="true"
@@ -90,46 +90,38 @@
 				</h:panelGrid>
 				<h:commandButton action="#{kundenHandler.speichern()}"
 					value="Speichern" />
-				<h:link outcome="#{kundenHandler.abbrechen()}" value="Abbrechen" />
 			</h:form>
-				<h:form>
+			<h:form>
 				<h:panelGrid columns="2" headerClass="header" footerClass="footer">
 					<h:outputLabel value="Straße:" for="strasse" />
 					<h:panelGroup>
 						<h:inputText id="strasse"
-							value="#{kundenHandler.merkeAdresse.strasse}" required="true"
+							value="#{kundenHandler.merkeKunde.adresse.strasse}" required="true"
 							requiredMessage="Eingabe fehlt" />
 						<h:message for="strasse" styleClass="message" />
 					</h:panelGroup>
 					<h:outputLabel value="Postleihzahl:" for="plz" />
 					<h:panelGroup>
-						<h:inputText id="plz"
-							value="#{kundenHandler.merkeAdresse.plz}" required="true"
-							requiredMessage="Eingabe fehlt" />
+						<h:inputText id="plz" value="#{kundenHandler.merkeKunde.adresse.plz}"
+							required="true" requiredMessage="Eingabe fehlt" />
 						<h:message for="plz" styleClass="message" />
 					</h:panelGroup>
 					<h:outputLabel value="Ort:" for="ort" />
 					<h:panelGroup>
-						<h:inputText id="ort"
-							value="#{kundenHandler.merkeAdresse.ort}" required="true"
-							requiredMessage="Eingabe fehlt" />
+						<h:inputText id="ort" value="#{kundenHandler.merkeKunde.adresse.ort}"
+							required="true" requiredMessage="Eingabe fehlt" />
 						<h:message for="ort" styleClass="message" />
 					</h:panelGroup>
-					<h:commandButton action="#{kundenHandler.saveNewAddress()}"
-						value="Speichern" />
 				</h:panelGrid>
-				<div id="center">
-					<f:facet name="header">Abbrechen</f:facet>
-					<h:commandButton action="#{kundenHandler.abbrechen()}"
-						value="Abbrechen" />
-				</div>
+				<h:commandButton action="#{kundenHandler.speichern()}"
+					value="Speichern" />
 			</h:form>
-			</ui:insert>
-		</div>
-		<div id="footer">
-			<ui:insert name="footer">
-			
-			</ui:insert>
-		</div>
-	</h:body>
+		</ui:insert>
+	</div>
+	<div id="footer">
+		<ui:insert name="footer">
+
+		</ui:insert>
+	</div>
+</h:body>
 </html>
