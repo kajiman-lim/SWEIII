@@ -32,17 +32,16 @@ import de.hsb.app.zv.model.Rolle;
 @FacesConfig
 @Named("kundenHandler")
 @SessionScoped
-public class KundenHandler implements Serializable{
+public class KundenHandler implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private DataModel<Kunde> kunden;
-	private Kunde merkeKunde= new Kunde();
-	
-	@PersistenceContext(name="zv-persistence-unit")
+	private Kunde merkeKunde = new Kunde();
+
+	@PersistenceContext(name = "zv-persistence-unit")
 	private EntityManager em;
 	@Resource
 	private UserTransaction utx;
 
-	
 	@PostConstruct
 	public void init() {
 		try {
@@ -52,7 +51,7 @@ public class KundenHandler implements Serializable{
 		} catch (SystemException e) {
 			e.printStackTrace();
 		}
-		kunden= new ListDataModel<>();
+		kunden = new ListDataModel<>();
 		kunden.setWrappedData(em.createNamedQuery("SelectKunden").getResultList());
 		try {
 			utx.commit();
@@ -70,8 +69,7 @@ public class KundenHandler implements Serializable{
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	@Transactional
 	public String speichern() {
 		merkeKunde = em.merge(merkeKunde);
@@ -79,43 +77,44 @@ public class KundenHandler implements Serializable{
 		kunden.setWrappedData(em.createNamedQuery("SelectKunden").getResultList());
 		return "kundenDaten";
 	}
+
 	public String edit() {
 		HttpSession session = SessionUtils.getSession();
 		merkeKunde = (Kunde) session.getAttribute("kunde");
 		return "neuerKunde";
 	}
+
 	public String neu() {
-		
-		return "kundenDaten";
+		System.out.println("new User");
+		return "index";
 	}
+
 	public String zurück() {
 		return "kundenDaten";
 	}
+
 	public String kreditkarte() {
 		merkeKunde = kunden.getRowData();
 		return "kreditkarte";
 	}
+
 	public String adresse() {
 		merkeKunde = kunden.getRowData();
 		return "adresse";
 	}
-	
-	
-	
-	
+
 	public Anrede[] getAnredeValues() {
 		return Anrede.values();
 	}
+
 	public Kreditkartentyp[] getKreditkartentypValues() {
 		return Kreditkartentyp.values();
 	}
+
 	public Rolle[] getRolleValues() {
 		return Rolle.values();
 	}
-	
-	
-	
-	
+
 	public DataModel<Kunde> getKunden() {
 		return kunden;
 	}

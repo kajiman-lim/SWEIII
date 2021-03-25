@@ -6,8 +6,7 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<f:metadata>
-		<f:event listener="#{loginHandler.ifLoggedIn()}"
-			type="preRenderView"></f:event>
+		<f:event listener="#{loginHandler.ifLoggedIn()}" type="preRenderView"></f:event>
 	</f:metadata>
 	<link rel="stylesheet" href="resources/css/common.css" type="text/css" />
 	<style>
@@ -28,7 +27,10 @@
 	<div class="form-container">
 		<h:form>
 			<p:panelGrid id="grid" columns="2">
-				<f:facet name="header">Anmeldung</f:facet>
+				<f:facet name="header">
+					<a href="index.xhtml"><img src="img/hzv-logo.png"
+						style="width: 50px; margin-top: 5px" alt="Logo" /></a>
+				</f:facet>
 				<p:outputLabel value="Username:" for="username" />
 				<h:panelGroup>
 					<p:inputText autocomplete="off" id="username" required="true"
