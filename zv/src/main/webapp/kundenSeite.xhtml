@@ -7,7 +7,8 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<f:metadata>
-		<f:event listener="#{loginHandler.ifLoggedIn()}" type="preRenderView"></f:event>
+		<f:event listener="#{loginHandler.checkLogKunde()}"
+			type="preRenderView"></f:event>
 	</f:metadata>
 	<title><ui:insert name="title">Hotel Zimmerverwaltung</ui:insert></title>
 	<meta name="viewport" content="initial-scale=1" />
@@ -84,25 +85,32 @@
 						<p:outputLabel styleClass="date-label" for="checkIn"
 							value="Anreise" />
 						<p:datePicker inputStyleClass="date-input-in"
-							monthNavigator="true" pattern="dd.MM.yy" styleClass="date-input"
+							value="#{zimmerHandler.reservierung.von}" monthNavigator="true"
+							pattern="dd.MM.yy" styleClass="date-input"
 							mindate="#{zimmerHandler.today()}" id="checkIn" />
 					</div>
 					<div class="form-part">
 						<p:outputLabel styleClass="date-label" for="checkOut"
 							value="Abreise" />
 						<p:datePicker inputStyleClass="date-input-in"
-							monthNavigator="true" pattern="dd.MM.yy" styleClass="date-input"
+							value="#{zimmerHandler.reservierung.bis}" monthNavigator="true"
+							pattern="dd.MM.yy" styleClass="date-input"
 							mindate="#{zimmerHandler.tomorrow()}" id="checkOut" />
 					</div>
 					<div class="form-part">
-						<p:commandButton styleClass="search-button" action="#"
-							value="Suchen" />
+						<p:commandButton styleClass="search-button"
+							actionListener="#{zimmerHandler.searchZimmer()}"
+							update=":show-table" value="Suchen" />
 					</div>
 				</h:form>
 			</div>
 			<div class="regLog">
-				<h:button styleClass="button" value="Registrieren"></h:button>
-				<h:button outcome="login.xhtml" styleClass="button" value="Anmelden" />
+				<h:form>
+					<h:outputText style="color:white" value="#{loginHandler.hello()}" />
+					<br />
+					<h:commandButton styleClass="button"
+						action="#{loginHandler.logOut()}" value="Abmelden" />
+				</h:form>
 			</div>
 		</ui:insert>
 	</div>
@@ -110,16 +118,36 @@
 		<ui:insert name="content">
 			<div class='div'>
 				<div class='div-head'>
-					<h3>Informationen über das Projekt</h3>
+					<h3>Verfügbare Zimmer</h3>
 				</div>
-				<p>Es gibt zwei Arten von Benutzer. Ein ist Kunde(KUNDE) und
-					anderer ist Mitarbeiter(ADMIN)</p>
-				<p>Zur Probe können Sie folgende Benutzername und Passwort
-					verwenden</p>
-				<ul>
-					<li>fstein: 12345(Kunde)</li>
-					<li>root: root(Mitarbeiter)</li>
-				</ul>
+				<div style="padding-top: 6px;">
+					<h:form id="show-table">
+						<p:dataTable var="zimmer" value="#{zimmerHandler.zimmer}"
+							filteredValue="#{zimmerHandler.filteredZimmer}"
+							rowClasses="odd, even" headerClass="header">
+							<p:column sortBy="#{zimmer.zimmerTyp.label}"
+								filterBy="#{zimmer.zimmerTyp.label}" filterMatchMode="contains">
+								<f:facet name="header">Zimmertyp</f:facet>
+								<h:outputText value="#{zimmer.zimmerTyp.label}" />
+							</p:column>
+							<p:column sortBy="#{zimmer.betten}" filterBy="#{zimmer.betten}"
+								filterMatchMode="exact">
+								<f:facet name="header">Betten</f:facet>
+								<h:outputText value="#{zimmer.betten}" />
+							</p:column>
+							<p:column>
+								<h:commandButton action="#{zimmerHandler.viewZimmer()}"
+									value="Detailansicht" />
+							</p:column>
+						</p:dataTable>
+					</h:form>
+					<div>
+						<h:form>
+							<h:commandButton styleClass="button" action="#{zimmerHandler.meineReservierung()}"
+								value="meine Reservierungen" />
+						</h:form>
+					</div>
+				</div>
 			</div>
 		</ui:insert>
 	</div>

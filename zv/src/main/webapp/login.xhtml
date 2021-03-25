@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<f:metadata>
+		<f:event listener="#{loginHandler.ifLoggedIn()}"
+			type="preRenderView"></f:event>
+	</f:metadata>
+	<link rel="stylesheet" href="resources/css/common.css" type="text/css" />
+	<style>
+.form-container {
+	position: absolute;
+	top: 35%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border: 1px solid #CACFD2;
+	padding: 10px;
+	border-radius: 3px;
+	background-color: #F8F9F9;
+	border-radius: 3px;
+}
+</style>
+</h:head>
+<h:body>
+	<div class="form-container">
+		<h:form>
+			<p:panelGrid id="grid" columns="2">
+				<f:facet name="header">Anmeldung</f:facet>
+				<p:outputLabel value="Username:" for="username" />
+				<h:panelGroup>
+					<p:inputText autocomplete="off" id="username" required="true"
+						requiredMessage="Eingabe fehlt"
+						value="#{loginHandler.user.username}" />
+					<p:message for="username" styleClass="message" />
+				</h:panelGroup>
+				<p:outputLabel value="Passwort:" for="passwort" />
+				<h:panelGroup>
+					<p:password autocomplete="off" id="passwort" required="true"
+						requiredMessage="Eingabe fehlt" showDetail="true"
+						autoUpdate="true" closable="true"
+						value="#{loginHandler.user.password}" />
+					<p:message for="passwort" styleClass="message" />
+				</h:panelGroup>
+				<f:facet name="footer">
+					<div class="center">
+						<p:commandButton styleClass="button-bottom"
+							action="#{loginHandler.logIn()}" value="Login" />
+					</div>
+					<p:message for="passwort" styleClass="message" />
+				</f:facet>
+			</p:panelGrid>
+		</h:form>
+	</div>
+</h:body>
+</html>
