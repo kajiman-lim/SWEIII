@@ -102,6 +102,12 @@ public class KundenHandler implements Serializable {
 		return "kundenDaten";
 	}
 
+	public String alleKunden() {
+		kunden = new ListDataModel<>();
+		kunden.setWrappedData(em.createNamedQuery("SelectKunden").getResultList());
+		return "alleKunden";
+	}
+	
 	public String editKreditkarte() {
 		merkeKunde = kunden.getRowData();
 		return "kreditkarte";
