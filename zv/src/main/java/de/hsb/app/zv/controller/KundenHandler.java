@@ -68,7 +68,7 @@ public class KundenHandler implements Serializable {
 				"+491600000001", new LinkedList<Adresse>(
 						Arrays.asList(new Adresse[] { new Adresse("An der Karlstadt 9", "27568 ", "Bremerhaven")})),
 				 new Kreditkarte(Kreditkartentyp.MASTER, "1234567891", new GregorianCalendar(2025, 3, 15).getTime(), "Daniel Keil"),  new Benutzer("keil", "123",
-						Rolle.KUNDE)));	
+						Rolle.ADMIN)));	
 		em.persist(new Kunde(Anrede.HERR, "Kajiman", "Chongbang", new GregorianCalendar(1994, 4, 20).getTime(),
 				"+491600000003", new LinkedList<Adresse>(
 						Arrays.asList(new Adresse[] { new Adresse("Friedrich-Eber-Strasse 50", "27570 ", "Bremerhaven")})),
