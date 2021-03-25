@@ -75,7 +75,7 @@ public class ZimmerHandler implements Serializable {
 		em.persist(new Zimmer(41, 2, zimmerTypen[5], "Prunkvolle Präsidentensuite mit individueller Ausstattung"));
 
 		zimmer = new ListDataModel<>();
-		zimmer.setWrappedData(em.createNamedQuery("SelectNull").getResultList());
+		zimmer.setWrappedData(em.createNamedQuery("SelectZimmer").getResultList());
 		reservierungen = new ListDataModel<>();
 		reservierungen.setWrappedData(em.createNamedQuery("SelectReservierung").getResultList());
 		try {
