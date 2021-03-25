@@ -110,7 +110,7 @@ public class ZimmerHandler implements Serializable{
 		return "detailansicht";
 	}
 	public String back() {
-		return "admin_alleZimmer";
+		return "alleZimmer";
 	}
 	public String reservieren() {
 		Reservierung reservierung = new Reservierung(merkeZimmer);
