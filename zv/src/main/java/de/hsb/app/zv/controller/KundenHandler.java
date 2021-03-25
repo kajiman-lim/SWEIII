@@ -99,10 +99,13 @@ public class KundenHandler implements Serializable {
 	}
 
 	@Transactional
-	public String speichern() {
+	public String speichern(boolean first) {
 		merkeKunde = em.merge(merkeKunde);
 		em.persist(merkeKunde);
 		kunden.setWrappedData(em.createNamedQuery("SelectKunden").getResultList());
+		if(first) {
+			return "neueKreditkarte";
+		}
 		return "kundenDaten";
 	}
 
