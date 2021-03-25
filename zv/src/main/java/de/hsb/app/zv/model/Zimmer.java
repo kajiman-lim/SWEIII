@@ -1,9 +1,10 @@
 package de.hsb.app.zv.model;
 
-import java.io.Serializable;
 import java.util.UUID;
 
+import javax.enterprise.context.RequestScoped;
 import javax.faces.annotation.FacesConfig;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,15 +12,18 @@ import javax.persistence.NamedQuery;
 
 @FacesConfig
 @NamedQuery(name="SelectZimmer", query="Select z from Zimmer z")
+@NamedQuery(name = "SearchZimmer", query = "SELECT z FROM Zimmer z LEFT OUTER JOIN Reservierung r ON z.id=r.zimmer WHERE ((r.von not between ?1 and ?2) or r.von = null) AND ((r.bis not between ?1 and ?2) or r.bis = null)")
+@NamedQuery(name="SelectNull", query="Select z FROM Zimmer z WHERE 0 != 0")
 @Entity
-public class Zimmer implements Serializable {
+@RequestScoped
+public class Zimmer{
 	@Id @GeneratedValue
 	private UUID id;
+//	@Column(unique=true)
 	private int nummer;
 	private int betten;
 	private ZimmerTyp zimmerTyp;
 	private String beschreibung;
-	private boolean reserviert;
 	
 	public Zimmer(){}
 	public Zimmer(int nummer, int betten, ZimmerTyp zimmerTyp, String beschreibung) {

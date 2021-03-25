@@ -17,6 +17,7 @@ import javax.persistence.TemporalType;
 @NamedQuery(name="SelectKreditkarten", query="Select k from Kreditkarte k")
 @RequestScoped
 public class Kreditkarte implements Serializable {
+	private static final long serialVersionUID = 1L;
 	@Id @GeneratedValue
 	private int id;
 	private Kreditkartentyp typ;
@@ -36,7 +37,7 @@ public class Kreditkarte implements Serializable {
 		this.typ = typ;
 		this.nummer = nummer;
 		SimpleDateFormat format = new SimpleDateFormat("MM/yy");
-		Date date = new Date();
+		Date date = null;
 		try {
 			date = format.parse(gueltigBis);
 		} catch (ParseException e) {

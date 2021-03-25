@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<f:metadata>
+		<f:event listener="#{loginHandler.checkLoggedIn()}"
+			type="preRenderView"></f:event>
+	</f:metadata>
+	<title><ui:insert>
+		Hotelzimmerverwaltung	
+	</ui:insert></title>
+</h:head>
+<h:body>
+	<div id="header">
+		<ui:insert name="header"></ui:insert>
+	</div>
+	<div id="content">
+		<ui:insert name="content">
+			<h:form>
+				<p:dataTable var="r" value="#{zimmerHandler.reservierungen}">
+					<f:facet name="header">alle Reservierungen</f:facet>
+					<p:column>
+						<f:facet name="header">Vorname</f:facet>
+						<h:outputText value="#{r.kunde.vorname}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">Vorname</f:facet>
+						<h:outputText value="#{r.kunde.nachname}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">Geburtsdatum</f:facet>
+						<h:outputText value="#{r.kunde.geburtsdatum}">
+							<f:convertDateTime pattern="dd.MM.yy" />
+						</h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header">Reserviert am</f:facet>
+						<h:outputText value="#{r.am}">
+							<f:convertDateTime pattern="HH:mm dd.MM.yy" />
+						</h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header">Check-In</f:facet>
+						<h:outputText value="#{r.von}">
+							<f:convertDateTime pattern="dd.MM.yy" />
+						</h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header">Check-Out</f:facet>
+						<h:outputText value="#{r.bis}">
+							<f:convertDateTime pattern="dd.MM.yy" />
+						</h:outputText>
+					</p:column>
+					<p:column>
+						<f:facet name="header">Zimmertyp</f:facet>
+						<h:outputText value="#{r.zimmer.zimmerTyp.label}" />
+					</p:column>
+					<p:column>
+						<f:facet name="header">Status</f:facet>
+						<h:outputText value="#{r.status.label}" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+			<h:form>
+				<h:commandButton action="#{zimmerHandler.back()}" value="Zurück" />
+			</h:form>
+		</ui:insert>
+	</div>
+	<div id="footer">
+		<ui:insert name="footer">
+		</ui:insert>
+	</div>
+</h:body>
+</html>

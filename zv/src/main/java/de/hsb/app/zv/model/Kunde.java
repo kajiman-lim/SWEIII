@@ -1,9 +1,9 @@
 package de.hsb.app.zv.model;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
+import javax.enterprise.context.RequestScoped;
 import javax.faces.annotation.FacesConfig;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -19,8 +19,8 @@ import javax.persistence.TemporalType;
 @NamedQuery(name = "SearchKunden", query = "SELECT k FROM Kunde k WHERE k.user.username = ?1 AND k.user.password = ?2")
 @NamedQuery(name = "SessionKunde", query = "SELECT k FROM Kunde k WHERE k.user.username = ?1 AND k.user.password = ?2")
 @Entity
-public class Kunde implements Serializable {
-	private static final long serialVersionUID = 1L;
+@RequestScoped
+public class Kunde{
 	@Id @GeneratedValue
 	private UUID kId;
 	private Anrede anrede;

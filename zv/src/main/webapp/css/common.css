@@ -4,9 +4,9 @@ body {
 	font-family:Abel;
 	margin: 0px;
 	padding: 0px;
-	box-sizing: border-box;
 }
 #header{
+	padding:5px;
 	margin: 0 auto;
 	background-color:#212F3D;
 	display: flex;
@@ -18,12 +18,28 @@ body {
 	padding:10px;
 }
 #content{
-	padding:20px;
+	padding:5px;
+	width:100%;
+	background-color:#F4F6F7;	
+}
+.div{
+	margin:10px auto;
+	padding:5px 20px;
+	max-width:900px;
+	border-radius:3px;
+	background-color:white;
+	border:1px solid #CACFD2;
+}
+.div-head{
+	border-bottom:1px solid #CACFD2;
+}
+.div-body{
+	padding:5px;
 }
 #footer{
+	color:black;
 	text-align:center;
 	padding:10px;
-	border-top: 1px solid #B3B6B7;
 	font-size:14px;
 }
 

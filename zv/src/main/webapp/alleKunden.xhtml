@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+	<h:head>
+		<f:metadata>
+			
+		</f:metadata>
+	</h:head>
+	<h:body>
+		<div id="header">
+			<ui:insert name="header">
+			
+			</ui:insert>
+		</div>
+		<div id="content">
+			<ui:insert name="content">
+				<h:dataTable var="kunde" value="#{kundenHandler.kunden}" rowClasses="odd,even" headerClass="header">
+					<f:facet name="header">Kunden</f:facet>
+					<h:column>
+						<f:facet name="header">Anrede</f:facet>
+						<h:outputText value="#{kunde.anrede.label}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Vorname</f:facet>
+						<h:outputText value="#{kunde.vorname}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Nachname</f:facet>
+						<h:outputText value="#{kunde.nachname}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">Geburtsdatum</f:facet>
+						<div id="center">
+							<h:outputText value="#{kunde.geburtsdatum}">
+								<f:convertDateTime pattern="dd.MM.yy"/>
+							</h:outputText>
+						</div>
+					</h:column>
+					<h:form>
+					<h:column>
+						<f:facet name="header">Zahldaten</f:facet>
+						<div id="center">
+							<h:commandButton action="#{kundenHandler.kreditkarte()}" value="Kreditkarte" />
+						</div>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Adressen</f:facet>
+						<div id="center">
+							<h:commandButton action="#{kundenHandler.adresse()}" value="Adresse" />
+						</div>
+					</h:column>
+					</h:form>
+				</h:dataTable>
+			</ui:insert>
+		</div>
+		<div id="footer">
+			<ui:insert name="footer">
+			
+			</ui:insert>
+		</div>
+	</h:body>
+</html>
