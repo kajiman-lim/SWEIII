@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.Entity;
@@ -19,38 +20,18 @@ import javax.persistence.TemporalType;
 public class Kreditkarte implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id @GeneratedValue
-	private int id;
+	private UUID id;
 	private Kreditkartentyp typ;
 	private String nummer;
-	@Temporal(TemporalType.DATE)
-	private Date gueltigBis;
+	private String gueltigBis;
 	private String inhaber;
 	
 	public Kreditkarte() {};
-	public Kreditkarte(Kreditkartentyp typ, String nummer, Date gueltigBis, String inhaber) {
+	public Kreditkarte(Kreditkartentyp typ, String nummer, String gueltigBis, String inhaber) {
 		this.typ = typ;
 		this.nummer = nummer;
 		this.gueltigBis = gueltigBis;
 		this.inhaber = inhaber;
-	}
-	public Kreditkarte(Kreditkartentyp typ, String nummer, String gueltigBis, String inhaber) {
-		this.typ = typ;
-		this.nummer = nummer;
-		SimpleDateFormat format = new SimpleDateFormat("MM/yy");
-		Date date = null;
-		try {
-			date = format.parse(gueltigBis);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		this.gueltigBis = date;
-		this.inhaber = inhaber;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
 	}
 	public Kreditkartentyp getTyp() {
 		return typ;
@@ -64,10 +45,10 @@ public class Kreditkarte implements Serializable {
 	public void setNummer(String nummer) {
 		this.nummer = nummer;
 	}
-	public Date getGueltigBis() {
+	public String getGueltigBis() {
 		return gueltigBis;
 	}
-	public void setGueltigBis(Date gueltigBis) {
+	public void setGueltigBis(String gueltigBis) {
 		this.gueltigBis = gueltigBis;
 	}
 	public String getInhaber() {
@@ -76,5 +57,10 @@ public class Kreditkarte implements Serializable {
 	public void setInhaber(String inhaber) {
 		this.inhaber = inhaber;
 	}
-	
+	public UUID getId() {
+		return id;
+	}
+	public void setId(UUID id) {
+		this.id = id;
+	}
 }

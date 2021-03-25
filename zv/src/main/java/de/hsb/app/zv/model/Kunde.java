@@ -20,7 +20,7 @@ import javax.persistence.TemporalType;
 @NamedQuery(name = "SessionKunde", query = "SELECT k FROM Kunde k WHERE k.user.username = ?1 AND k.user.password = ?2")
 @Entity
 @RequestScoped
-public class Kunde{
+public class Kunde {
 	@Id @GeneratedValue
 	private UUID kId;
 	private Anrede anrede;
@@ -30,7 +30,7 @@ public class Kunde{
 	private Date geburtsdatum;	
 	private String telNummer;	
 	private Adresse adresse;
-	private Kreditkarte kreditkarte;
+	//private Kreditkarte kreditkarte;
 	@OneToOne(cascade=CascadeType.ALL)
 	private Benutzer user; 
 	
@@ -38,9 +38,9 @@ public class Kunde{
 	public Kunde() {}
 	public Kunde(Adresse adresse, Kreditkarte kreditkarte) {
 		this.adresse = adresse;
-		this.kreditkarte = kreditkarte;
+		//this.kreditkarte = kreditkarte;
 	}
-	public Kunde(Anrede anrede, String vorname, String nachname, Date geburtsdatum, String telNummer, Adresse adresse, Kreditkarte kreditkarte) {
+	public Kunde(Anrede anrede, String vorname, String nachname, Date geburtsdatum, String telNummer, Adresse adresse) {
 		super();
 		this.anrede = anrede;
 		this.vorname = vorname;
@@ -48,18 +48,18 @@ public class Kunde{
 		this.geburtsdatum = geburtsdatum;
 		this.telNummer = telNummer;
 		this.adresse = adresse;
-		this.kreditkarte = kreditkarte;
+		//this.kreditkarte = kreditkarte;
 	}
 	
 	public Kunde(Anrede anrede, String vorname, String nachname, Date geburtsdatum, String telNummer, Adresse adresse,
-			Kreditkarte kreditkarte, Benutzer user) {
+			/*Kreditkarte kreditkarte,*/ Benutzer user) {
 		this.anrede = anrede;
 		this.vorname = vorname;
 		this.nachname = nachname;
 		this.geburtsdatum = geburtsdatum;
 		this.telNummer = telNummer;
 		this.adresse = adresse;
-		this.kreditkarte = kreditkarte;
+		//this.kreditkarte = kreditkarte;
 		this.user = user;
 	}
 	public String getVorname() {
@@ -112,12 +112,12 @@ public class Kunde{
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
 	}
-	public Kreditkarte getKreditkarte() {
+	/*public Kreditkarte getKreditkarte() {
 		return kreditkarte;
 	}
 	public void setKreditkarte(Kreditkarte kreditkarte) {
 		this.kreditkarte = kreditkarte;
-	}
+	}*/
 	public Benutzer getUser() {
 		return user;
 	}
