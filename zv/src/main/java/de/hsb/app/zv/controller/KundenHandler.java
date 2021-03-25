@@ -12,6 +12,7 @@ import javax.faces.model.ListDataModel;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpSession;
 import javax.transaction.UserTransaction;
 
 import de.hsb.app.zv.model.Anrede;
@@ -47,7 +48,10 @@ public class KundenHandler implements Serializable{
 	}
 	
 	
-	
+	public String edit() {
+		HttpSession session = SessionUtils.getSession();
+		merkeKunde = (Kunde) session.getAttribute("kunde");
+	}
 	public Anrede[] getAnredeValues() {
 		return Anrede.values();
 	}

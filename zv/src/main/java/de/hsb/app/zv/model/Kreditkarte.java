@@ -36,7 +36,7 @@ public class Kreditkarte implements Serializable {
 		this.typ = typ;
 		this.nummer = nummer;
 		SimpleDateFormat format = new SimpleDateFormat("MM/yy");
-		Date date = null;
+		Date date = new Date();
 		try {
 			date = format.parse(gueltigBis);
 		} catch (ParseException e) {
