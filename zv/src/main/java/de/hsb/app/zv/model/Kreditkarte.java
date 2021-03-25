@@ -1,9 +1,7 @@
 package de.hsb.app.zv.model;
 
-import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.Entity;
@@ -16,10 +14,9 @@ import javax.persistence.TemporalType;
 @Entity
 @NamedQuery(name="SelectKreditkarten", query="Select k from Kreditkarte k")
 @RequestScoped
-public class Kreditkarte implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class Kreditkarte{
 	@Id @GeneratedValue
-	private int id;
+	private UUID id;
 	private Kreditkartentyp typ;
 	private String nummer;
 	@Temporal(TemporalType.DATE)
@@ -33,25 +30,6 @@ public class Kreditkarte implements Serializable {
 		this.gueltigBis = gueltigBis;
 		this.inhaber = inhaber;
 	}
-	public Kreditkarte(Kreditkartentyp typ, String nummer, String gueltigBis, String inhaber) {
-		this.typ = typ;
-		this.nummer = nummer;
-		SimpleDateFormat format = new SimpleDateFormat("MM/yy");
-		Date date = null;
-		try {
-			date = format.parse(gueltigBis);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		this.gueltigBis = date;
-		this.inhaber = inhaber;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public Kreditkartentyp getTyp() {
 		return typ;
 	}
@@ -64,6 +42,7 @@ public class Kreditkarte implements Serializable {
 	public void setNummer(String nummer) {
 		this.nummer = nummer;
 	}
+
 	public Date getGueltigBis() {
 		return gueltigBis;
 	}
@@ -76,5 +55,10 @@ public class Kreditkarte implements Serializable {
 	public void setInhaber(String inhaber) {
 		this.inhaber = inhaber;
 	}
-	
+	public UUID getId() {
+		return id;
+	}
+	public void setId(UUID id) {
+		this.id = id;
+	}
 }

@@ -3,6 +3,7 @@ package de.hsb.app.zv.controller;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.GregorianCalendar;
+import java.util.LinkedList;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -54,8 +55,7 @@ public class LoginHandler implements Serializable{
 		} catch (NotSupportedException | SystemException e) {
 			e.printStackTrace();
 		}
-			em.persist(new Kunde(Anrede.HERR,"Finn","Stein",new GregorianCalendar(1995,6,15).getTime(),"+07719807061324",new Adresse(),new Kreditkarte(),new Benutzer("fstein","12345",Rolle.KUNDE)));
-			em.persist(new Kunde(Anrede.HERR,"Kajiman","Chongbang",new GregorianCalendar(1995,6,15).getTime(),"+07719807061324",new Adresse(),new Kreditkarte(),new Benutzer("kchongbang","12345",Rolle.KUNDE)));
+			em.persist(new Kunde(Anrede.HERR,"Finn","Stein",new GregorianCalendar(1995,6,15).getTime(),"+07719807061324",new LinkedList<Adresse>(),new Kreditkarte(),new Benutzer("fstein","12345",Rolle.KUNDE)));
 			em.persist(new Mitarbeiter(Position.MGR,"Homo","Habilis",new GregorianCalendar(1992,1,15).getTime(),new Benutzer("root","root",Rolle.ADMIN)));
 		try {
 			utx.commit();

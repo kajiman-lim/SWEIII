@@ -1,15 +1,19 @@
 package de.hsb.app.zv.model;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.annotation.FacesConfig;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -20,7 +24,7 @@ import javax.persistence.TemporalType;
 @NamedQuery(name = "SessionKunde", query = "SELECT k FROM Kunde k WHERE k.user.username = ?1 AND k.user.password = ?2")
 @Entity
 @RequestScoped
-public class Kunde{
+public class Kunde {
 	@Id @GeneratedValue
 	private UUID kId;
 	private Anrede anrede;
@@ -28,19 +32,22 @@ public class Kunde{
 	private String nachname;	
 	@Temporal(TemporalType.DATE)
 	private Date geburtsdatum;	
-	private String telNummer;	
-	private Adresse adresse;
+	private String telNummer;
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "kunde_id", nullable = true)
+	private List<Adresse> adresse;
+	@OneToOne(cascade=CascadeType.ALL)
 	private Kreditkarte kreditkarte;
 	@OneToOne(cascade=CascadeType.ALL)
 	private Benutzer user; 
 	
 	
 	public Kunde() {}
-	public Kunde(Adresse adresse, Kreditkarte kreditkarte) {
+	public Kunde(List<Adresse> adresse, Kreditkarte kreditkarte) {
 		this.adresse = adresse;
 		this.kreditkarte = kreditkarte;
 	}
-	public Kunde(Anrede anrede, String vorname, String nachname, Date geburtsdatum, String telNummer, Adresse adresse, Kreditkarte kreditkarte) {
+	public Kunde(Anrede anrede, String vorname, String nachname, Date geburtsdatum, String telNummer, List<Adresse> adresse) {
 		super();
 		this.anrede = anrede;
 		this.vorname = vorname;
@@ -48,10 +55,9 @@ public class Kunde{
 		this.geburtsdatum = geburtsdatum;
 		this.telNummer = telNummer;
 		this.adresse = adresse;
-		this.kreditkarte = kreditkarte;
 	}
 	
-	public Kunde(Anrede anrede, String vorname, String nachname, Date geburtsdatum, String telNummer, Adresse adresse,
+	public Kunde(Anrede anrede, String vorname, String nachname, Date geburtsdatum, String telNummer, List<Adresse> adresse,
 			Kreditkarte kreditkarte, Benutzer user) {
 		this.anrede = anrede;
 		this.vorname = vorname;
@@ -60,6 +66,9 @@ public class Kunde{
 		this.telNummer = telNummer;
 		this.adresse = adresse;
 		this.kreditkarte = kreditkarte;
+		this.user = user;
+	}
+	public Kunde(Benutzer user) {
 		this.user = user;
 	}
 	public String getVorname() {
@@ -106,10 +115,11 @@ public class Kunde{
 	public void setAnrede(Anrede anrede) {
 		this.anrede = anrede;
 	}
-	public Adresse getAdresse() {
+
+	public List<Adresse> getAdresse() {
 		return adresse;
 	}
-	public void setAdresse(Adresse adresse) {
+	public void setAdresse(List<Adresse> adresse) {
 		this.adresse = adresse;
 	}
 	public Kreditkarte getKreditkarte() {

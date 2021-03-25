@@ -25,6 +25,7 @@
 </style>
 </h:head>
 <h:body>
+<ui:insert name="content">
 	<div class="form-container">
 		<h:form>
 			<p:panelGrid id="grid" columns="2">
@@ -35,35 +36,28 @@
 				<p:outputLabel value="Benutzername:" for="username" />
 				<h:panelGroup>
 					<p:inputText autocomplete="off" id="username" required="true"
-						requiredMessage="Eingabe fehlt"
-						value="#{kundenHandler.merkeKunde.user.username}" />
-					<p:message for="username" styleClass="message" />
+						requiredMessage=""
+						value="#{kundenHandler.merkeUser.username}" />
 				</h:panelGroup>
 				<p:outputLabel value="Passwort:" for="passwort" />
 				<h:panelGroup>
 					<p:password autocomplete="off" id="passwort" required="true"
-						requiredMessage="Eingabe fehlt" 
-						autoUpdate="true" closable="true"
-						value="#{kundenHandler.merkeKunde.user.password}" />
-					<p:message for="passwort" styleClass="message" />
+						value="#{kundenHandler.merkeUser.password}" match="wiPasswort" />
 				</h:panelGroup>
 				<p:outputLabel value="Wi-Passwort:" for="wiPasswort" />
 				<h:panelGroup>
 					<p:password autocomplete="off" id="wiPasswort" required="true"
-						requiredMessage="Eingabe fehlt"
-						autoUpdate="true" closable="true"
-						value="#{kundenHandler.merkeKunde.user.password}" />
-					<p:message for="wiPasswort" styleClass="message" />
+						value="#{kundenHandler.merkeUser.password}" />
 				</h:panelGroup>
 				<f:facet name="footer">
 					<div class="center">
-						<p:commandButton styleClass="button-bottom"
+						<h:commandButton styleClass="button-bottom"
 							action="#{kundenHandler.neu()}" value="Registrieren" />
 					</div>
-					<p:message for="passwort" styleClass="message" />
 				</f:facet>
 			</p:panelGrid>
 		</h:form>
 	</div>
+</ui:insert>
 </h:body>
 </html>
