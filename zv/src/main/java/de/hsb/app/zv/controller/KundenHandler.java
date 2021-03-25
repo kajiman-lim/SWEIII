@@ -71,12 +71,6 @@ public class KundenHandler implements Serializable {
 			e.printStackTrace();
 		}
 	}
-
-	public String alleKunden() {
-		kunden.setWrappedData(em.createNamedQuery("SelectKunden").getResultList());
-		return "alleKunden";
-	}
-
 	public String neu() {
 		user = new ListDataModel<>();
 		user.setWrappedData(
