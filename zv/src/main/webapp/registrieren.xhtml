@@ -32,32 +32,33 @@
 					<a href="index.xhtml"><img src="img/hzv-logo.png"
 						style="width: 50px; margin-top: 5px" alt="Logo" /></a>
 				</f:facet>
-				<p:outputLabel value="Vorname:" for="vorname" />
+				<p:outputLabel value="Benutzername:" for="username" />
 				<h:panelGroup>
-					<p:inputText autocomplete="off" id="vorname" required="true"
+					<p:inputText autocomplete="off" id="username" required="true"
 						requiredMessage="Eingabe fehlt"
-						value="#{loginHandler.user.username}" />
-					<p:message for="vorname" styleClass="message" />
-				</h:panelGroup>
-				<p:outputLabel value="Nachname:" for="nachname" />
-				<h:panelGroup>
-					<p:inputText autocomplete="off" id="nachname" required="true"
-						requiredMessage="Eingabe fehlt"
-						value="#{loginHandler.user.username}" />
-					<p:message for="nachname" styleClass="message" />
+						value="#{kundenHandler.merkeKunde.user.username}" />
+					<p:message for="username" styleClass="message" />
 				</h:panelGroup>
 				<p:outputLabel value="Passwort:" for="passwort" />
 				<h:panelGroup>
 					<p:password autocomplete="off" id="passwort" required="true"
 						requiredMessage="Eingabe fehlt" showDetail="true"
 						autoUpdate="true" closable="true"
-						value="#{loginHandler.user.password}" />
+						value="#{kundenHandler.merkeKunde.user.password}" />
 					<p:message for="passwort" styleClass="message" />
+				</h:panelGroup>
+				<p:outputLabel value="Wi-Passwort:" for="wiPasswort" />
+				<h:panelGroup>
+					<p:password autocomplete="off" id="wiPasswort" required="true"
+						requiredMessage="Eingabe fehlt" showDetail="true"
+						autoUpdate="true" closable="true"
+						value="#{kundenHandler.merkeKunde.user.password}" />
+					<p:message for="wiPasswort" styleClass="message" />
 				</h:panelGroup>
 				<f:facet name="footer">
 					<div class="center">
 						<p:commandButton styleClass="button-bottom"
-							action="#{loginHandler.logIn()}" value="Login" />
+							action="#{kundenHandler.neu()}" value="Registrieren" />
 					</div>
 					<p:message for="passwort" styleClass="message" />
 				</f:facet>

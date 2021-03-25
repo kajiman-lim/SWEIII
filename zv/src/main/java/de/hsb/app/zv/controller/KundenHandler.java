@@ -52,13 +52,6 @@ public class KundenHandler implements Serializable{
 		} catch (SystemException e) {
 			e.printStackTrace();
 		}
-		Anrede[] anreden = getAnredeValues();
-		Kreditkartentyp[] typen = getKreditkartentypValues();
-		Rolle[] rollen = getRolleValues();
-		em.persist(new Kunde(anreden[0], "Yevhenii", "Kapuler", new GregorianCalendar(1999, 3, 19).getTime(), "+491600000000", new Adresse("Heider Ring 10", "2777", "Ganderkese"), new Kreditkarte(typen[0], "1234567890", "04/24", "Yevhenii Kapuler"), new Benutzer("Eugen", "123", rollen[1])));
-		em.persist(new Kunde(anreden[0], "Daniel", "Keil", new GregorianCalendar(1999, 12, 4).getTime(), "+490101010101", new Adresse("Otto-Suhr-Str. 30", "27578", "Bremerhaven"), new Kreditkarte(typen[1], "0101010101", "10/22", "Daniel Keil"), new Benutzer("GucciDaniel", "1337", rollen[0])));
-		em.persist(new Kunde(anreden[0], "Yevhenii", "Kapuler", new GregorianCalendar(1999, 3, 19).getTime(), "+491600000000", new Adresse("Heider Ring 10", "2777", "Ganderkese"), new Kreditkarte(typen[0], "1234567890", "04/24", "Yevhenii Kapuler"), new Benutzer("Eugen2", "123", rollen[1])));
-		em.persist(new Kunde(anreden[0], "Yevhenii", "Kapuler", new GregorianCalendar(1999, 3, 19).getTime(), "+491600000000", new Adresse("Heider Ring 10", "2777", "Ganderkese"), new Kreditkarte(typen[0], "1234567890", "04/24", "Yevhenii Kapuler"), new Benutzer("Eugen3", "123", rollen[1])));
 		kunden= new ListDataModel<>();
 		kunden.setWrappedData(em.createNamedQuery("SelectKunden").getResultList());
 		try {
@@ -90,6 +83,10 @@ public class KundenHandler implements Serializable{
 		HttpSession session = SessionUtils.getSession();
 		merkeKunde = (Kunde) session.getAttribute("kunde");
 		return "neuerKunde";
+	}
+	public String neu() {
+		
+		return "kundenDaten";
 	}
 	public String zurück() {
 		return "kundenDaten";

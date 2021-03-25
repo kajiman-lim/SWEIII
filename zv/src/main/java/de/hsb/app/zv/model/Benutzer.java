@@ -13,6 +13,7 @@ import javax.persistence.NamedQuery;
 @FacesConfig
 @NamedQuery(name="SelectBenutzer",query="SELECT b FROM Benutzer b")
 @NamedQuery(name = "SelectLogin", query = "SELECT b FROM Benutzer b WHERE b.username = ?1 AND b.password = ?2")
+@NamedQuery(name = "SelectAlready", query = "SELECT b FROM Benutzer b WHERE b.username = ?1")
 @RequestScoped
 @Entity
 public class Benutzer {

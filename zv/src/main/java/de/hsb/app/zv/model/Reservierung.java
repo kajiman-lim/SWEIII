@@ -36,9 +36,6 @@ public class Reservierung{
 	@ManyToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name = "zimmer_id", nullable = true)
 	private Zimmer zimmer;
-<<<<<<< HEAD
-
-
 	private ReservierungStatus status;
 	
 	public Reservierung() {}
@@ -49,19 +46,6 @@ public class Reservierung{
 		this.kunde = kunde;
 		this.zimmer = zimmer;
 		this.status = status;
-
-=======
-	private ReservierungStatus status;
-	
-	public Reservierung() {}
-	public Reservierung(Date am,Date von, Date bis, Kunde kunde, Zimmer zimmer,ReservierungStatus status) {
-		this.am = am;
-		this.von = von;
-		this.bis = bis;
-		this.kunde = kunde;
-		this.zimmer = zimmer;
-		this.status = status;
->>>>>>> branch 'master' of https://github.com/kajiman-lim/SWEIII.git
 	}
 	public UUID getId() {
 		return id;
