@@ -1,7 +1,5 @@
 package de.hsb.app.zv.model;
 
-import java.io.Serializable;
-
 import javax.enterprise.context.RequestScoped;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +10,7 @@ import javax.validation.constraints.Size;
 @Entity
 @NamedQuery(name="SelectAdressen", query="Select a from Adresse a")
 @RequestScoped
-public class Adresse implements Serializable{
+public class Adresse{
 	@Id @GeneratedValue
 	private Integer id;
 	@Size(min=3, max=30)

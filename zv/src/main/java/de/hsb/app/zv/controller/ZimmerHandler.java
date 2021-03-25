@@ -43,6 +43,7 @@ public class ZimmerHandler implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private DataModel<Zimmer> zimmer;
 	private List<Zimmer> filteredZimmer;
+	private DataModel<Zimmer> searchedZimmer;
 	private Zimmer merkeZimmer;
 	private Kunde merkeKunde = new Kunde();
 	private DataModel<Reservierung> reservierungen;
@@ -60,20 +61,22 @@ public class ZimmerHandler implements Serializable {
 		} catch (NotSupportedException | SystemException e) {
 			e.printStackTrace();
 		}
-		ZimmerTyp[] zimmerTypen = getZimmerTypValues();
-		em.persist(new Zimmer(21, 2, zimmerTypen[1], "Einfaches Doppelzimmer mit 2 Betten"));
-		em.persist(new Zimmer(22, 1, zimmerTypen[0], "Einfaches Einzelzimmer"));
-		em.persist(new Zimmer(23, 1, zimmerTypen[0], "Einfaches Einzelzimmer"));
-		em.persist(new Zimmer(24, 1, zimmerTypen[1], "Einfaches Doppelzimmer mit Doppelbett"));
-		em.persist(new Zimmer(25, 3, zimmerTypen[2],
-				"Einfaches Familienzimmer mit einem Doppelbett und zwei Einzelbetten"));
-		em.persist(new Zimmer(31, 2, zimmerTypen[4], "Luxuriöses Doppelzimmer mit 2 Betten"));
-		em.persist(new Zimmer(32, 1, zimmerTypen[3], "Luxuriöses Einzelzimmer"));
-		em.persist(new Zimmer(33, 1, zimmerTypen[3], "Luxuriöses Einzelzimmer mit Blick auf die braune Weser"));
-		em.persist(new Zimmer(34, 2, zimmerTypen[4],
-				"Luxuriöses Doppelzimmer mit Doppelbett und Blick auf die braune Weser"));
-		em.persist(new Zimmer(41, 2, zimmerTypen[5], "Prunkvolle Präsidentensuite mit individueller Ausstattung"));
+//		ZimmerTyp[] zimmerTypen = getZimmerTypValues();
+//		em.persist(new Zimmer(21, 2, zimmerTypen[1], "Einfaches Doppelzimmer mit 2 Betten"));
+//		em.persist(new Zimmer(22, 1, zimmerTypen[0], "Einfaches Einzelzimmer"));
+//		em.persist(new Zimmer(23, 1, zimmerTypen[0], "Einfaches Einzelzimmer"));
+//		em.persist(new Zimmer(24, 1, zimmerTypen[1], "Einfaches Doppelzimmer mit Doppelbett"));
+//		em.persist(new Zimmer(25, 3, zimmerTypen[2],
+//				"Einfaches Familienzimmer mit einem Doppelbett und zwei Einzelbetten"));
+//		em.persist(new Zimmer(31, 2, zimmerTypen[4], "Luxuriöses Doppelzimmer mit 2 Betten"));
+//		em.persist(new Zimmer(32, 1, zimmerTypen[3], "Luxuriöses Einzelzimmer"));
+//		em.persist(new Zimmer(33, 1, zimmerTypen[3], "Luxuriöses Einzelzimmer mit Blick auf die braune Weser"));
+//		em.persist(new Zimmer(34, 2, zimmerTypen[4],
+//				"Luxuriöses Doppelzimmer mit Doppelbett und Blick auf die braune Weser"));
+//		em.persist(new Zimmer(41, 2, zimmerTypen[5], "Prunkvolle Präsidentensuite mit individueller Ausstattung"));
 
+		searchedZimmer = new ListDataModel<>();
+		searchedZimmer.setWrappedData(em.createNamedQuery("SelectNull").getResultList());
 		zimmer = new ListDataModel<>();
 		zimmer.setWrappedData(em.createNamedQuery("SelectZimmer").getResultList());
 		reservierungen = new ListDataModel<>();
@@ -89,6 +92,10 @@ public class ZimmerHandler implements Serializable {
 
 	public String viewZimmer() {
 		merkeZimmer = zimmer.getRowData();
+		return "detailansicht";
+	}
+	public String viewSearchedZimmer() {
+		merkeZimmer = searchedZimmer.getRowData();
 		return "detailansicht";
 	}
 
@@ -115,8 +122,8 @@ public class ZimmerHandler implements Serializable {
 		Query query = em.createNamedQuery("SearchZimmer");
 		query.setParameter(1, checkIn);
 		query.setParameter(2, checkOut);
-		zimmer = new ListDataModel<>();
-		zimmer.setWrappedData(query.getResultList());
+		searchedZimmer = new ListDataModel<>();
+		searchedZimmer.setWrappedData(query.getResultList());
 	}
 	public String meineReservierung() {
 		HttpSession session = SessionUtils.getSession();
@@ -127,6 +134,17 @@ public class ZimmerHandler implements Serializable {
 		reservierungen = new ListDataModel<>();
 		reservierungen.setWrappedData(query.getResultList());
 		return "meineReservierung";
+	}
+
+	public String alleReservierung() {
+		reservierungen = new ListDataModel<>();
+		reservierungen.setWrappedData(em.createNamedQuery("SelectReservierung").getResultList());
+		return "alleReservierungen";
+	}
+	public String alleZimmer() {
+		zimmer = new ListDataModel<>();
+		zimmer.setWrappedData(em.createNamedQuery("SelectZimmer").getResultList());
+		return "admin_alleZimmer";
 	}
 	
 	public String newZimmer() {
@@ -229,6 +247,14 @@ public class ZimmerHandler implements Serializable {
 
 	public void setReservierung(Reservierung reservierung) {
 		this.reservierung = reservierung;
+	}
+
+	public DataModel<Zimmer> getSearchedZimmer() {
+		return searchedZimmer;
+	}
+
+	public void setSearchedZimmer(DataModel<Zimmer> searchedZimmer) {
+		this.searchedZimmer = searchedZimmer;
 	}
 
 }

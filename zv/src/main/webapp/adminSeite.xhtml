@@ -1,20 +1,170 @@
+<?xml version = "1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<f:metadata>
 		<f:event listener="#{loginHandler.checkLogAdmin()}"
 			type="preRenderView"></f:event>
 	</f:metadata>
-	<title>
-		<ui:insert name="header">
-			Admin Page
-		</ui:insert>
-	</title>
+	<title><ui:insert name="title">Hotel Zimmerverwaltung</ui:insert></title>
+	<meta name="viewport" content="initial-scale=1" />
+	<link rel="shortcut icon" type="image/png" href="img/hzv-logo.png" />
+	<link rel="stylesheet" href="css/common.css" type="text/css" />
+	<link rel="stylesheet" href="css/fonts.css" type="text/css" />
+	<style>
+.form {
+	border: 1px solid #5D6D7E;
+	border-radius: 3px;
+	padding: 15px 10px;
+	margin: 10px;
+	font-family: Abel;
+	font-size: 15px;
+}
+
+.date-label {
+	color: white;
+	font-family: Abel;
+}
+
+.date-input {
+	padding: 0px 10px 0px 5px;
+}
+
+.date-input-in {
+	width: 150px;
+}
+
+.search-button {
+	font-family: Abel;
+}
+
+.form-part {
+	display: inline;
+}
+
+.button {
+	cursor: pointer;
+	font-family: Abel;
+}
+
+@media only screen and (max-width: 600px) {
+	.form {
+		width: 100%;
+	}
+	.date-label {
+		display: block;
+		width: 100%;
+	}
+	.date-input, .date-input-in {
+		padding: 0px;
+		padding-bottom: 5px;
+		display: block;
+		width: 100%;
+	}
+	.search-button {
+		margin-top: 10px;
+		width: 100%;
+	}
+}
+</style>
 </h:head>
 <h:body>
-	<h1>Hello, I am Admin</h1>
+	<div id="header">
+		<ui:insert name="header">
+			<div>
+				<a href="index.xhtml"> <img class="logo" src="img/hzv-logo.png" />
+				</a>
+			</div>
+			<div class="form">
+				<h:form>
+					<div class="form-part">
+						<p:outputLabel styleClass="date-label" for="checkIn"
+							value="Anreise" />
+						<p:datePicker inputStyleClass="date-input-in"
+							value="#{zimmerHandler.reservierung.von}" monthNavigator="true"
+							pattern="dd.MM.yy" styleClass="date-input"
+							mindate="#{zimmerHandler.today()}" id="checkIn" />
+					</div>
+					<div class="form-part">
+						<p:outputLabel styleClass="date-label" for="checkOut"
+							value="Abreise" />
+						<p:datePicker inputStyleClass="date-input-in"
+							value="#{zimmerHandler.reservierung.bis}" monthNavigator="true"
+							pattern="dd.MM.yy" styleClass="date-input"
+							mindate="#{zimmerHandler.tomorrow()}" id="checkOut" />
+					</div>
+					<div class="form-part">
+						<p:commandButton styleClass="search-button"
+							actionListener="#{zimmerHandler.searchZimmer()}"
+							update=":show-table" value="Suchen" />
+					</div>
+				</h:form>
+			</div>
+			<div class="regLog">
+				<h:form>
+					<h:outputText style="color:white" value="#{loginHandler.hello()}" />
+					<br />
+					<h:commandButton styleClass="button"
+						action="#{loginHandler.logOut()}" value="Abmelden" />
+				</h:form>
+			</div>
+		</ui:insert>
+	</div>
+	<div id="content">
+		<ui:insert name="content">
+			<div class='div'>
+				<div class='div-head'>
+					<h3>Verfügbare Zimmer</h3>
+				</div>
+				<div style="padding-top: 6px;">
+					<h:form id="show-table">
+						<p:dataTable var="zimmer" value="#{zimmerHandler.searchedZimmer}"
+							filteredValue="#{zimmerHandler.filteredZimmer}"
+							rowClasses="odd, even" headerClass="header">
+							<p:column sortBy="#{zimmer.zimmerTyp.label}"
+								filterBy="#{zimmer.zimmerTyp.label}" filterMatchMode="contains">
+								<f:facet name="header">Zimmertyp</f:facet>
+								<h:outputText value="#{zimmer.zimmerTyp.label}" />
+							</p:column>
+							<p:column sortBy="#{zimmer.betten}" filterBy="#{zimmer.betten}"
+								filterMatchMode="exact">
+								<f:facet name="header">Betten</f:facet>
+								<h:outputText value="#{zimmer.betten}" />
+							</p:column>
+							<p:column>
+								<h:commandButton action="#{zimmerHandler.viewSearchedZimmer()}"
+									value="Detailansicht" />
+							</p:column>
+						</p:dataTable>
+					</h:form>
+					<div>
+						<h:form>
+							<h:commandButton styleClass="button" action="#{zimmerHandler.alleReservierung()}"
+								value="alle Reservierungen" />
+							<h:commandButton styleClass="button" action="#{kundenHandler.alleKunden()}"
+								value="alle Kunden" />
+											<h:commandButton styleClass="button" action="#{zimmerHandler.alleZimmer()}"
+								value="alle Zimmer" />
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</ui:insert>
+	</div>
+	<div id="footer">
+		<ui:insert name="footer">
+			<p>Software Engineering 3, Hotelzimmerverwaltung</p>
+			<p>
+				&copy;
+				2021 Hochschule Bremerhaven | &#10102; Daniel Keil &#10123; Kajiman
+				Chongbang &#10124; Yevhenii Kapuler &#10125; Malte Bothen | Alle
+				Rechte vorbehalten.
+			</p>
+		</ui:insert>
+	</div>
 </h:body>
 </html>

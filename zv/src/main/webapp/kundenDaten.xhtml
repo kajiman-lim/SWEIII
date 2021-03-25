@@ -4,14 +4,10 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
-	<f:metadata>
-
-	</f:metadata>
 </h:head>
 <h:body>
 	<div id="header">
 		<ui:insert name="header">
-
 		</ui:insert>
 	</div>
 	<div id="content">
@@ -40,7 +36,7 @@
 							requiredMessage="Eingabe fehlt" />
 						<h:message for="nachname" styleClass="message" />
 					</h:panelGroup>
-					<h:outputLabel value="Geburtsdatum" for="geburtsdatum" />
+					<h:outputLabel value="Geburtsdatum (dd.MM.yy)" for="geburtsdatum" />
 					<h:panelGroup>
 						<h:inputText id="geburtsdatum"
 							value="#{kundenHandler.merkeKunde.geburtsdatum}" required="true"
@@ -49,11 +45,8 @@
 						</h:inputText>
 						<h:message for="geburtsdatum" styleClass="message" />
 					</h:panelGroup>
-					<h:commandButton action="#{kundenHandler.speichern()}"
-						value="Speichern" />
 				</h:panelGrid>
-			</h:form>
-			<h:form>
+				<hr/>
 				<h:panelGrid>
 					<h:outputLabel value="Typ" for="typ" />
 					<h:panelGroup styleClass="col-2">
@@ -71,7 +64,7 @@
 							value="#{kundenHandler.merkeKunde.kreditkarte.nummer}" />
 						<h:message for="nummer" styleClass="message" />
 					</h:panelGroup>
-					<h:outputLabel value="Gueltig bis" for="gueltigBis" />
+					<h:outputLabel value="Gueltig bis(z. B. 10/13)" for="gueltigBis" />
 					<h:panelGroup styleClass="col-2">
 						<h:inputText id="gueltigBis" required="true"
 							requiredMessage="Eingabe feht"
@@ -88,10 +81,7 @@
 						<h:message for="inhaber" styleClass="message" />
 					</h:panelGroup>
 				</h:panelGrid>
-				<h:commandButton action="#{kundenHandler.speichern()}"
-					value="Speichern" />
-			</h:form>
-			<h:form>
+				<hr/>
 				<h:panelGrid columns="2" headerClass="header" footerClass="footer">
 					<h:outputLabel value="Straße:" for="strasse" />
 					<h:panelGroup>
