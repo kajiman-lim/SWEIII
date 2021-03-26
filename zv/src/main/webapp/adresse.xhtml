@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>Hotelzimmerverwaltung</title>
+	<link rel="stylesheet" href="css/fonts.css" type="text/css" />
+	<style>
+body {
+	border: solid 1px black;
+	border-radius: 5px;
+	margin: 10px auto;
+	padding: 15px;
+	max-width: 400px;
+	font-family:Abel;
+	}
+.message{
+	color:red;
+	}
+</style>
+</h:head>
+<h:body>
+	<div id="header">
+		<ui:insert name="header">
+		</ui:insert>
+	</div>
+	<div id="content">
+		<ui:insert name="content">
+			<h:form>
+				<h:panelGrid columns="2" cellspacing="5px" headerClass="header" footerClass="footer">
+					<h:outputLabel value="Straße:" for="strasse" />
+					<h:panelGroup>
+						<h:inputText id="strasse"
+							value="#{kundenHandler.merkeKunde.adresse.strasse}"
+							required="true" requiredMessage="Eingabe fehlt" />
+						<h:message for="strasse" styleClass="message" />
+					</h:panelGroup>
+					<h:outputLabel value="Postleihzahl:" for="plz" />
+					<h:panelGroup>
+						<h:inputText id="plz"
+							value="#{kundenHandler.merkeKunde.adresse.plz}" required="true"
+							requiredMessage="Eingabe fehlt" />
+						<h:message for="plz" styleClass="message" />
+					</h:panelGroup>
+					<h:outputLabel value="Ort:" for="ort" />
+					<h:panelGroup>
+						<h:inputText id="ort"
+							value="#{kundenHandler.merkeKunde.adresse.ort}" required="true"
+							requiredMessage="Eingabe fehlt" />
+						<h:message for="ort" styleClass="message" />
+					</h:panelGroup>
+				</h:panelGrid>
+				<h:button outcome="alleKunden.xhtml" value="Abbrechen" />
+				<h:commandButton action="#{kundenHandler.save()}"
+					value="Speichern" />
+			</h:form>
+		</ui:insert>
+	</div>
+	<div id="footer">
+		<ui:insert name="footer">
+
+		</ui:insert>
+	</div>
+</h:body>
+</html>

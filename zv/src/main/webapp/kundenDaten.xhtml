@@ -4,6 +4,21 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 <h:head>
+	<title>Hotelzimmerverwaltung</title>
+	<link rel="stylesheet" href="css/fonts.css" type="text/css" />
+	<style>
+body {
+	border: solid 1px black;
+	border-radius: 5px;
+	margin: 10px auto;
+	padding: 15px;
+	max-width: 700px;
+	font-family:Abel;
+	}
+.message{
+	color:red;
+	}
+</style>
 </h:head>
 <h:body>
 	<div id="header">
@@ -22,21 +37,21 @@
 								itemValue="#{form}" itemLabel="#{form.label}" />
 						</h:selectOneMenu>
 					</h:panelGroup>
-					<h:outputLabel value="Vorname:" for="vorname" />
+					<h:outputLabel value="Vorname :*" for="vorname" />
 					<h:panelGroup>
 						<h:inputText id="vorname"
 							value="#{kundenHandler.merkeKunde.vorname}" required="true"
 							requiredMessage="Eingabe fehlt" />
 						<h:message for="vorname" styleClass="message" />
 					</h:panelGroup>
-					<h:outputLabel value="Nachname:" for="nachname" />
+					<h:outputLabel value="Nachname: *" for="nachname" />
 					<h:panelGroup>
 						<h:inputText id="nachname"
 							value="#{kundenHandler.merkeKunde.nachname}" required="true"
 							requiredMessage="Eingabe fehlt" />
 						<h:message for="nachname" styleClass="message" />
 					</h:panelGroup>
-					<h:outputLabel value="Geburtsdatum (dd.MM.yy)" for="geburtsdatum" />
+					<h:outputLabel value="Geburtsdatum (dd.MM.yy): *" for="geburtsdatum" />
 					<h:panelGroup>
 						<h:inputText id="geburtsdatum"
 							value="#{kundenHandler.merkeKunde.geburtsdatum}" required="true"
@@ -46,7 +61,7 @@
 						<h:message for="geburtsdatum" styleClass="message" />
 					</h:panelGroup>
 				</h:panelGrid>
-				<hr/>
+				<hr />
 				<h:panelGrid>
 					<h:outputLabel value="Typ" for="typ" />
 					<h:panelGroup styleClass="col-2">
@@ -81,28 +96,31 @@
 						<h:message for="inhaber" styleClass="message" />
 					</h:panelGroup>
 				</h:panelGrid>
-				<hr/>
+				<hr />
 				<h:panelGrid columns="2" headerClass="header" footerClass="footer">
 					<h:outputLabel value="Straße:" for="strasse" />
 					<h:panelGroup>
 						<h:inputText id="strasse"
-							value="#{kundenHandler.merkeKunde.adresse.strasse}" required="true"
-							requiredMessage="Eingabe fehlt" />
+							value="#{kundenHandler.merkeKunde.adresse.strasse}"
+							required="true" requiredMessage="Eingabe fehlt" />
 						<h:message for="strasse" styleClass="message" />
 					</h:panelGroup>
 					<h:outputLabel value="Postleihzahl:" for="plz" />
 					<h:panelGroup>
-						<h:inputText id="plz" value="#{kundenHandler.merkeKunde.adresse.plz}"
-							required="true" requiredMessage="Eingabe fehlt" />
+						<h:inputText id="plz"
+							value="#{kundenHandler.merkeKunde.adresse.plz}" required="true"
+							requiredMessage="Eingabe fehlt" />
 						<h:message for="plz" styleClass="message" />
 					</h:panelGroup>
 					<h:outputLabel value="Ort:" for="ort" />
 					<h:panelGroup>
-						<h:inputText id="ort" value="#{kundenHandler.merkeKunde.adresse.ort}"
-							required="true" requiredMessage="Eingabe fehlt" />
+						<h:inputText id="ort"
+							value="#{kundenHandler.merkeKunde.adresse.ort}" required="true"
+							requiredMessage="Eingabe fehlt" />
 						<h:message for="ort" styleClass="message" />
 					</h:panelGroup>
 				</h:panelGrid>
+				<h:button outcome="kundenSeite.xhtml" value="Abbrechen" />
 				<h:commandButton action="#{kundenHandler.speichern()}"
 					value="Speichern" />
 			</h:form>

@@ -1,5 +1,10 @@
 @charset "ISO-8859-1";
 
+root{
+	font-size:10px;
+	
+}
+
 body {
 	font-family:Abel;
 	margin: 0px;
@@ -29,6 +34,7 @@ body {
 	border-radius:3px;
 	background-color:white;
 	border:1px solid #CACFD2;
+	padding-bottom:20px;
 }
 .div-head{
 	border-bottom:1px solid #CACFD2;

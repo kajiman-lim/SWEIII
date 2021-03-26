@@ -19,7 +19,7 @@ import javax.persistence.NamedQuery;
 public class Zimmer{
 	@Id @GeneratedValue
 	private UUID id;
-	@Column(unique=true)
+//	@Column(unique=true)
 	private int nummer;
 	private int betten;
 	private ZimmerTyp zimmerTyp;

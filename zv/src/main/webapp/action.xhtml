@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<f:metadata>
+		<f:event listener="#{loginHandler.checkLogAdmin()}"
+			type="preRenderView"></f:event>
+	</f:metadata>
+	<link rel="stylesheet" href="css/fonts.css" type="text/css" />
+	<title><ui:insert>
+		Hotelzimmerverwaltung	
+	</ui:insert></title>
+	<style>
+#content {
+	font-family:Abel;
+	max-width: 400px;
+	margin: 10px auto;
+	padding: 10px;
+	border: 1px solid black;
+	border-radius:5px;
+}
+</style>
+</h:head>
+<h:body>
+	<div id="content">
+		<ui:insert name="content"></ui:insert>
+		<h:form>
+			<h:panelGrid columns="2" cellpadding="1" cellspacing="6"
+				headerClass="header" footerClass="footer">
+				<h:outputLabel value="Status:" for="status" />
+				<h:panelGroup>
+					<h:selectOneMenu id="status"
+						value="#{zimmerHandler.reservierung.status}">
+						<f:selectItems var="form"
+							value="#{zimmerHandler.getStatusValues()}" itemValue="#{form}"
+							itemLabel="#{form.label}" />
+					</h:selectOneMenu>
+				</h:panelGroup>
+				<h:outputLabel value="Kunde:" for="kunde" />
+				<h:panelGroup>
+					<h:outputText id="kunde"
+						value="#{zimmerHandler.reservierung.kunde.vorname} #{zimmerHandler.reservierung.kunde.nachname}" />
+				</h:panelGroup>
+				<h:outputLabel value="Reserviert am:" for="am" />
+				<h:panelGroup>
+					<h:outputText id="am" value="#{zimmerHandler.reservierung.am}">
+						<f:convertDateTime pattern="HH:mm dd.MM.yy" />
+					</h:outputText>
+				</h:panelGroup>
+				<h:outputLabel value="Check-In:" for="checkIn" />
+				<h:panelGroup>
+					<h:inputText id="checkIn" value="#{zimmerHandler.reservierung.von}"
+						required="true" requiredMessage="Eingabe fehlt">
+						<f:convertDateTime pattern="dd.MM.yyyy" />
+					</h:inputText>
+					<h:message for="geburtsdatum" styleClass="message" />
+				</h:panelGroup>
+				<h:outputLabel value="Check-Out:" for="checkOut" />
+				<h:panelGroup>
+					<h:inputText id="checkOut"
+						value="#{zimmerHandler.reservierung.bis}" required="true"
+						requiredMessage="Eingabe fehlt">
+						<f:convertDateTime pattern="dd.MM.yyyy" />
+					</h:inputText>
+					<h:message for="geburtsdatum" styleClass="message" />
+				</h:panelGroup>
+
+				<h:commandButton action="#{zimmerHandler.cancelAction()}"
+					value="Abbrechen" />
+				<h:commandButton action="#{zimmerHandler.saveAction()}"
+					value="Speichern" />
+			</h:panelGrid>
+		</h:form>
+	</div>
+</h:body>
+</html>

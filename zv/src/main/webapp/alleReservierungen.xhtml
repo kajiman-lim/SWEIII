@@ -6,12 +6,26 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<f:metadata>
-		<f:event listener="#{loginHandler.checkLoggedIn()}"
+		<f:event listener="#{loginHandler.checkLogAdmin()}"
 			type="preRenderView"></f:event>
 	</f:metadata>
 	<title><ui:insert>
 		Hotelzimmerverwaltung	
 	</ui:insert></title>
+	<style>
+	body{
+		margin:10px auto;
+		max-width:1200px;
+	}
+table {
+	font-size: 15px;
+	font-family: Abel;
+}
+.button{
+	font-family:Abel;
+	margin: 0px 5px;
+}
+</style>
 </h:head>
 <h:body>
 	<div id="header">
@@ -20,47 +34,53 @@
 	<div id="content">
 		<ui:insert name="content">
 			<h:form>
-				<p:dataTable var="r" value="#{zimmerHandler.reservierungen}">
-					<f:facet name="header">alle Reservierungen</f:facet>
-					<p:column>
+				<p:dataTable var="r" value="#{zimmerHandler.reservierungen}"
+					widgetVar="f"
+					filteredValue="#{zimmerHandler.filteredReservierungen}">
+					<f:facet name="header">Alle Reservierungen</f:facet>
+					<p:column sortBy="#{r.kunde.vorname}" filterBy="#{r.kunde.vorname}"
+						filterMatchMode="contains">
 						<f:facet name="header">Vorname</f:facet>
 						<h:outputText value="#{r.kunde.vorname}" />
 					</p:column>
-					<p:column>
+					<p:column sortBy="#{r.kunde.nachname}"
+						filterBy="#{r.kunde.nachname}" filterMatchMode="contains">
 						<f:facet name="header">Vorname</f:facet>
 						<h:outputText value="#{r.kunde.nachname}" />
 					</p:column>
-					<p:column>
+					<p:column sortBy="#{r.kunde.geburtsdatum}">
 						<f:facet name="header">Geburtsdatum</f:facet>
 						<h:outputText value="#{r.kunde.geburtsdatum}">
 							<f:convertDateTime pattern="dd.MM.yy" />
 						</h:outputText>
 					</p:column>
-					<p:column>
+					<p:column sortBy="#{r.am}">
 						<f:facet name="header">Reserviert am</f:facet>
 						<h:outputText value="#{r.am}">
 							<f:convertDateTime pattern="HH:mm dd.MM.yy" />
 						</h:outputText>
 					</p:column>
-					<p:column>
+					<p:column sortBy="#{r.von}">
 						<f:facet name="header">Check-In</f:facet>
 						<h:outputText value="#{r.von}">
 							<f:convertDateTime pattern="dd.MM.yy" />
 						</h:outputText>
 					</p:column>
-					<p:column>
+					<p:column sortBy="#{r.bis}">
 						<f:facet name="header">Check-Out</f:facet>
 						<h:outputText value="#{r.bis}">
 							<f:convertDateTime pattern="dd.MM.yy" />
 						</h:outputText>
 					</p:column>
-					<p:column>
+					<p:column sortBy="#{r.zimmer.zimmerTyp}"
+						filterBy="#{r.zimmer.zimmerTyp}" filterMatchMode="contains">
 						<f:facet name="header">Zimmertyp</f:facet>
 						<h:outputText value="#{r.zimmer.zimmerTyp.label}" />
 					</p:column>
 					<p:column>
 						<f:facet name="header">Status</f:facet>
 						<h:outputText value="#{r.status.label}" />
+						<h:commandButton styleClass="button" action="#{zimmerHandler.action()}" value="Action" />
 					</p:column>
 				</p:dataTable>
 			</h:form>

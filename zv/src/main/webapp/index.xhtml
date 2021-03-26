@@ -96,12 +96,16 @@
 					</div>
 					<div class="form-part">
 						<p:commandButton styleClass="search-button" action="#"
-							value="Suchen" />
+							onclick="PF('sample').show();" value="Suchen" />
+						<p:dialog header="Meldung !" widgetVar="sample" minHeight="40">
+							<h:outputText value="Melden Sie Bitte sich an !" />
+						</p:dialog>
 					</div>
 				</h:form>
 			</div>
 			<div class="regLog">
-				<h:button outcome="registrieren.xhtml" styleClass="button" value="Registrieren"></h:button>
+				<h:button outcome="registrieren.xhtml" styleClass="button"
+					value="Registrieren"></h:button>
 				<h:button outcome="login.xhtml" styleClass="button" value="Anmelden" />
 			</div>
 		</ui:insert>

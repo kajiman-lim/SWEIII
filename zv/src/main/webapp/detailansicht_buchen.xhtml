@@ -9,8 +9,8 @@
 		<f:event listener="#{loginHandler.checkLoggedIn()}"
 			type="preRenderView"></f:event>
 	</f:metadata>
-	<link rel="stylesheet" href="css/fonts.css" type="text/css" />
 	<title><ui:insert name="title">Zimmerliste</ui:insert></title>
+	<link rel="stylesheet" href="css/fonts.css" type="text/css" />
 	<style>
 body {
 	border: solid 1px black;
@@ -48,6 +48,8 @@ body {
 		</h:panelGrid>
 		<h:form>
 			<h:commandButton action="#{zimmerHandler.back()}" value="Zurück" />
+			<h:commandButton action="#{zimmerHandler.reservieren()}"
+				value="Buchen" />
 		</h:form>
 	</div>
 </h:body>

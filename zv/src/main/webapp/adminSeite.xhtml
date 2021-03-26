@@ -51,6 +51,11 @@
 	font-family: Abel;
 }
 
+table {
+	font-size: 15px;
+	font-family: Abel;
+}
+
 @media only screen and (max-width: 600px) {
 	.form {
 		width: 100%;
@@ -109,6 +114,13 @@
 					<h:outputText style="color:white" value="#{loginHandler.hello()}" />
 					<br />
 					<h:commandButton styleClass="button"
+						action="#{zimmerHandler.alleReservierung()}"
+						value="Reservierungen" />
+					<h:commandButton styleClass="button"
+						action="#{kundenHandler.alleKunden()}" value="Kunden" />
+					<h:commandButton styleClass="button"
+						action="#{zimmerHandler.alleZimmer()}" value="Zimmer" />
+					<h:commandButton styleClass="button"
 						action="#{loginHandler.logOut()}" value="Abmelden" />
 				</h:form>
 			</div>
@@ -143,12 +155,13 @@
 					</h:form>
 					<div>
 						<h:form>
-							<h:commandButton styleClass="button" action="#{zimmerHandler.alleReservierung()}"
+							<h:commandButton styleClass="button"
+								action="#{zimmerHandler.alleReservierung()}"
 								value="alle Reservierungen" />
-							<h:commandButton styleClass="button" action="#{kundenHandler.alleKunden()}"
-								value="alle Kunden" />
-											<h:commandButton styleClass="button" action="#{zimmerHandler.alleZimmer()}"
-								value="alle Zimmer" />
+							<h:commandButton styleClass="button"
+								action="#{kundenHandler.alleKunden()}" value="alle Kunden" />
+							<h:commandButton styleClass="button"
+								action="#{zimmerHandler.alleZimmer()}" value="alle Zimmer" />
 						</h:form>
 					</div>
 				</div>

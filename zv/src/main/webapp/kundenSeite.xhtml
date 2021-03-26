@@ -51,6 +51,11 @@
 	font-family: Abel;
 }
 
+table {
+	font-size: 15px;
+	font-family: Abel;
+}
+
 @media only screen and (max-width: 600px) {
 	.form {
 		width: 100%;
@@ -106,8 +111,13 @@
 			</div>
 			<div class="regLog">
 				<h:form>
-					<h:outputText style="color:white" value="#{loginHandler.hello()}" />
+					<h:outputText style="color:white;text-align:left" value="#{loginHandler.hello()}" />
 					<br />
+					<h:commandButton styleClass="button"
+						action="#{zimmerHandler.meineReservierung()}"
+						value="Reservierungen" />
+					<h:commandButton styleClass="button"
+						action="#{kundenHandler.edit()}" value="meine Angaben" />
 					<h:commandButton styleClass="button"
 						action="#{loginHandler.logOut()}" value="Abmelden" />
 				</h:form>
@@ -118,7 +128,7 @@
 		<ui:insert name="content">
 			<div class='div'>
 				<div class='div-head'>
-					<h3>Verfügbare Zimmer</h3>
+					<h4>Verfügbare Zimmer</h4>
 				</div>
 				<div style="padding-top: 6px;">
 					<h:form id="show-table">
@@ -136,17 +146,18 @@
 								<h:outputText value="#{zimmer.betten}" />
 							</p:column>
 							<p:column>
-								<h:commandButton action="#{zimmerHandler.viewSearchedZimmer()}"
+								<h:commandButton action="#{zimmerHandler.viewSearchedZimmer_buchen()}"
 									value="Detailansicht" />
 							</p:column>
 						</p:dataTable>
 					</h:form>
 					<div>
 						<h:form>
-							<h:commandButton styleClass="button" action="#{zimmerHandler.meineReservierung()}"
+							<h:commandButton styleClass="button"
+								action="#{zimmerHandler.meineReservierung()}"
 								value="meine Reservierungen" />
-							<h:commandButton styleClass="button" action="#{kundenHandler.edit()}"
-								value="meine Angaben" />
+							<h:commandButton styleClass="button"
+								action="#{kundenHandler.edit()}" value="meine Angaben" />
 						</h:form>
 					</div>
 				</div>

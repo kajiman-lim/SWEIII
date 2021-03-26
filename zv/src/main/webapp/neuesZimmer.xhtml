@@ -6,6 +6,17 @@
 
 <h:head>
 	<title><ui:insert name="title">neues Zimmer</ui:insert></title>
+	<link rel="stylesheet" href="css/fonts.css" type="text/css" />
+	<style>
+body {
+	border: solid 1px black;
+	border-radius: 5px;
+	margin: 10px auto;
+	padding: 15px;
+	max-width: 400px;
+	font-family: Abel;
+}
+</style>
 </h:head>
 <h:body>
 	<div id="content">
@@ -43,10 +54,8 @@
 						<h:message for="beschreibung" styleClass="message" />
 					</h:panelGroup>
 				</h:panelGrid>
+				<h:button outcome="admin_alleZimmer.xhtml" value="Zurück" />
 				<h:commandButton action="#{zimmerHandler.save()}" value="Speichern" />
-			</h:form>
-			<h:form>
-				<h:commandButton action="#{zimmerHandler.back()}" value="Zurück" />
 			</h:form>
 		</ui:insert>
 	</div>

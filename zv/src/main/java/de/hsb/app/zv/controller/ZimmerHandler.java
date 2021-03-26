@@ -28,6 +28,7 @@ import javax.transaction.SystemException;
 import javax.transaction.Transactional;
 import javax.transaction.UserTransaction;
 
+import de.hsb.app.zv.model.Anrede;
 import de.hsb.app.zv.model.Benutzer;
 import de.hsb.app.zv.model.Kunde;
 import de.hsb.app.zv.model.Reservierung;
@@ -43,6 +44,7 @@ public class ZimmerHandler implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private DataModel<Zimmer> zimmer;
 	private List<Zimmer> filteredZimmer;
+	private List<Reservierung> filteredReservierungen;
 	private DataModel<Zimmer> searchedZimmer;
 	private Zimmer merkeZimmer;
 	private Kunde merkeKunde = new Kunde();
@@ -94,9 +96,36 @@ public class ZimmerHandler implements Serializable {
 		merkeZimmer = zimmer.getRowData();
 		return "detailansicht";
 	}
+
 	public String viewSearchedZimmer() {
 		merkeZimmer = searchedZimmer.getRowData();
 		return "detailansicht";
+	}
+
+	public String viewSearchedZimmer_buchen() {
+		merkeZimmer = searchedZimmer.getRowData();
+		return "detailansicht_buchen";
+	}
+
+	public ReservierungStatus[] getStatusValues() {
+		return ReservierungStatus.values();
+	}
+
+	public String action() {
+		reservierung = reservierungen.getRowData();
+		return "action";
+	}
+
+	@Transactional
+	public String saveAction() {
+		reservierung = em.merge(reservierung);
+		em.persist(reservierung);
+		reservierungen.setWrappedData(em.createNamedQuery("SelectReservierung").getResultList());
+		return "alleReservierungen";
+	}
+
+	public String cancelAction() {
+		return "alleReservierungen";
 	}
 
 	@Transactional
@@ -125,6 +154,7 @@ public class ZimmerHandler implements Serializable {
 		searchedZimmer = new ListDataModel<>();
 		searchedZimmer.setWrappedData(query.getResultList());
 	}
+
 	public String meineReservierung() {
 		HttpSession session = SessionUtils.getSession();
 		merkeKunde = (Kunde) session.getAttribute("kunde");
@@ -141,12 +171,13 @@ public class ZimmerHandler implements Serializable {
 		reservierungen.setWrappedData(em.createNamedQuery("SelectReservierung").getResultList());
 		return "alleReservierungen";
 	}
+
 	public String alleZimmer() {
 		zimmer = new ListDataModel<>();
 		zimmer.setWrappedData(em.createNamedQuery("SelectZimmer").getResultList());
 		return "admin_alleZimmer";
 	}
-	
+
 	public String newZimmer() {
 		merkeZimmer = new Zimmer();
 		return "neuesZimmer";
@@ -157,7 +188,7 @@ public class ZimmerHandler implements Serializable {
 		merkeZimmer = em.merge(merkeZimmer);
 		em.persist(merkeZimmer);
 		zimmer.setWrappedData(em.createNamedQuery("SelectZimmer").getResultList());
-		return "alleZimmer";
+		return "admin_alleZimmer";
 	}
 
 	public String edit() {
@@ -176,15 +207,15 @@ public class ZimmerHandler implements Serializable {
 
 	public void back() throws IOException {
 		HttpSession session = SessionUtils.getSession();
-		Benutzer login = (Benutzer)session.getAttribute("login");
+		Benutzer login = (Benutzer) session.getAttribute("login");
 		ExternalContext context = FacesContext.getCurrentInstance().getExternalContext();
 		if (login != null) {
-			if(login.getRole().equals(Rolle.ADMIN)) {
+			if (login.getRole().equals(Rolle.ADMIN)) {
 				context.redirect("adminSeite.xhtml");
-			}else {
+			} else {
 				context.redirect("kundenSeite.xhtml");
 			}
-		}else {
+		} else {
 			context.redirect("login.xhtml");
 		}
 	}
@@ -255,6 +286,14 @@ public class ZimmerHandler implements Serializable {
 
 	public void setSearchedZimmer(DataModel<Zimmer> searchedZimmer) {
 		this.searchedZimmer = searchedZimmer;
+	}
+
+	public List<Reservierung> getFilteredReservierungen() {
+		return filteredReservierungen;
+	}
+
+	public void setFilteredReservierungen(List<Reservierung> filteredReservierungen) {
+		this.filteredReservierungen = filteredReservierungen;
 	}
 
 }

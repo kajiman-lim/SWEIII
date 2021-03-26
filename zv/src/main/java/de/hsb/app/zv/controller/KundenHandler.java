@@ -1,7 +1,7 @@
 package de.hsb.app.zv.controller;
 
 import java.io.Serializable;
-import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -35,6 +35,7 @@ import de.hsb.app.zv.model.Rolle;
 public class KundenHandler implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private DataModel<Kunde> kunden;
+	private List<Kunde> filteredKunden;
 	private Kunde merkeKunde = new Kunde();
 	private DataModel<Benutzer> user;
 	private Benutzer merkeUser = new Benutzer();
@@ -98,8 +99,8 @@ public class KundenHandler implements Serializable {
 		return "kundenDaten";
 	}
 
-	public String zurück() {
-		return "kundenDaten";
+	public String cancel() {
+		return "kundenSeite";
 	}
 
 	public String alleKunden() {
@@ -118,6 +119,14 @@ public class KundenHandler implements Serializable {
 		return "adresse";
 	}
 
+	@Transactional
+	public String save() {
+		merkeKunde = em.merge(merkeKunde);
+		em.persist(merkeKunde);
+		kunden.setWrappedData(em.createNamedQuery("SelectKunden").getResultList());
+		return "alleKunden";
+	}
+	
 	public Anrede[] getAnredeValues() {
 		return Anrede.values();
 	}
@@ -160,5 +169,11 @@ public class KundenHandler implements Serializable {
 
 	public void setUser(DataModel<Benutzer> user) {
 		this.user = user;
+	}
+	public List<Kunde> getFilteredKunden() {
+		return filteredKunden;
+	}
+	public void setFilteredKunden(List<Kunde> filteredKunden) {
+		this.filteredKunden = filteredKunden;
 	}
 }
