@@ -28,7 +28,6 @@ import javax.transaction.SystemException;
 import javax.transaction.Transactional;
 import javax.transaction.UserTransaction;
 
-import de.hsb.app.zv.model.Anrede;
 import de.hsb.app.zv.model.Benutzer;
 import de.hsb.app.zv.model.Kunde;
 import de.hsb.app.zv.model.Reservierung;
@@ -63,20 +62,6 @@ public class ZimmerHandler implements Serializable {
 		} catch (NotSupportedException | SystemException e) {
 			e.printStackTrace();
 		}
-//		ZimmerTyp[] zimmerTypen = getZimmerTypValues();
-//		em.persist(new Zimmer(21, 2, zimmerTypen[1], "Einfaches Doppelzimmer mit 2 Betten"));
-//		em.persist(new Zimmer(22, 1, zimmerTypen[0], "Einfaches Einzelzimmer"));
-//		em.persist(new Zimmer(23, 1, zimmerTypen[0], "Einfaches Einzelzimmer"));
-//		em.persist(new Zimmer(24, 1, zimmerTypen[1], "Einfaches Doppelzimmer mit Doppelbett"));
-//		em.persist(new Zimmer(25, 3, zimmerTypen[2],
-//				"Einfaches Familienzimmer mit einem Doppelbett und zwei Einzelbetten"));
-//		em.persist(new Zimmer(31, 2, zimmerTypen[4], "Luxuriöses Doppelzimmer mit 2 Betten"));
-//		em.persist(new Zimmer(32, 1, zimmerTypen[3], "Luxuriöses Einzelzimmer"));
-//		em.persist(new Zimmer(33, 1, zimmerTypen[3], "Luxuriöses Einzelzimmer mit Blick auf die braune Weser"));
-//		em.persist(new Zimmer(34, 2, zimmerTypen[4],
-//				"Luxuriöses Doppelzimmer mit Doppelbett und Blick auf die braune Weser"));
-//		em.persist(new Zimmer(41, 2, zimmerTypen[5], "Prunkvolle Präsidentensuite mit individueller Ausstattung"));
-
 		searchedZimmer = new ListDataModel<>();
 		searchedZimmer.setWrappedData(em.createNamedQuery("SelectNull").getResultList());
 		zimmer = new ListDataModel<>();
