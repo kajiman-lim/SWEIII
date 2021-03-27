@@ -86,12 +86,13 @@ table {
 			</div>
 			<div class="form">
 				<h:form>
+				
 					<div class="form-part">
 						<p:outputLabel styleClass="date-label" for="checkIn"
 							value="Anreise" />
 						<p:datePicker inputStyleClass="date-input-in"
 							value="#{zimmerHandler.reservierung.von}" monthNavigator="true"
-							pattern="dd.MM.yy" styleClass="date-input"
+							pattern="dd.MM.yy" styleClass="date-input" required="true"
 							mindate="#{zimmerHandler.today()}" id="checkIn" />
 					</div>
 					<div class="form-part">
@@ -99,7 +100,7 @@ table {
 							value="Abreise" />
 						<p:datePicker inputStyleClass="date-input-in"
 							value="#{zimmerHandler.reservierung.bis}" monthNavigator="true"
-							pattern="dd.MM.yy" styleClass="date-input"
+							pattern="dd.MM.yy" styleClass="date-input" required="true"
 							mindate="#{zimmerHandler.tomorrow()}" id="checkOut" />
 					</div>
 					<div class="form-part">
@@ -111,13 +112,14 @@ table {
 			</div>
 			<div class="regLog">
 				<h:form>
-					<h:outputText style="color:white;text-align:left" value="#{loginHandler.hello()}" />
+					<h:outputText style="color:white;text-align:left"
+						value="#{loginHandler.hello()}" />
 					<br />
 					<h:commandButton styleClass="button"
 						action="#{zimmerHandler.meineReservierung()}"
 						value="Reservierungen" />
 					<h:commandButton styleClass="button"
-						action="#{kundenHandler.edit()}" value="meine Angaben" />
+						action="#{kundenHandler.edit()}" value="Kundendaten" />
 					<h:commandButton styleClass="button"
 						action="#{loginHandler.logOut()}" value="Abmelden" />
 				</h:form>
@@ -146,7 +148,8 @@ table {
 								<h:outputText value="#{zimmer.betten}" />
 							</p:column>
 							<p:column>
-								<h:commandButton action="#{zimmerHandler.viewSearchedZimmer_buchen()}"
+								<h:commandButton
+									action="#{zimmerHandler.viewSearchedZimmer_buchen()}"
 									value="Detailansicht" />
 							</p:column>
 						</p:dataTable>
@@ -157,7 +160,7 @@ table {
 								action="#{zimmerHandler.meineReservierung()}"
 								value="meine Reservierungen" />
 							<h:commandButton styleClass="button"
-								action="#{kundenHandler.edit()}" value="meine Angaben" />
+								action="#{kundenHandler.edit()}" value="Kundendaten" />
 						</h:form>
 					</div>
 				</div>

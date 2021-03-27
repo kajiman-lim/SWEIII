@@ -60,10 +60,18 @@ body {
 						</h:inputText>
 						<h:message for="geburtsdatum" styleClass="message" />
 					</h:panelGroup>
+					<h:outputLabel value="Telefonnummer: *" for="telNummer" />
+					<h:panelGroup>
+						<h:inputText id="telNummer"
+							value="#{kundenHandler.merkeKunde.telNummer}" required="true"
+							requiredMessage="Eingabe fehlt" />
+							<h:message for="telNummer" styleClass="message" />
+					</h:panelGroup>
 				</h:panelGrid>
 				<hr />
 				<h:panelGrid>
-					<h:outputLabel value="Typ" for="typ" />
+					<h2>Kreditkartendaten</h2>
+					<h:outputLabel value="Kreditkartenyp" for="typ" />
 					<h:panelGroup styleClass="col-2">
 						<h:selectOneMenu id="typ"
 							value="#{kundenHandler.merkeKunde.kreditkarte.typ}">
@@ -97,6 +105,7 @@ body {
 					</h:panelGroup>
 				</h:panelGrid>
 				<hr />
+				<h2>Adresse</h2>
 				<h:panelGrid columns="2" headerClass="header" footerClass="footer">
 					<h:outputLabel value="Straße:" for="strasse" />
 					<h:panelGroup>

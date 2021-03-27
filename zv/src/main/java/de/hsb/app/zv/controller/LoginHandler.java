@@ -66,11 +66,11 @@ public class LoginHandler implements Serializable{
 				 new Kreditkarte(Kreditkartentyp.MASTER, "1234567891", new GregorianCalendar(2025, 3, 15).getTime(), "Daniel Keil"),  new Benutzer("keil", "123",
 						Rolle.KUNDE)));	
 		em.persist(new Kunde(Anrede.HERR, "Kajiman", "Chongbang", new GregorianCalendar(1994, 4, 20).getTime(),
-				"+491600000003",new Adresse("Friedrich-Eber-Strasse 50", "27570 ", "Bremerhaven"),
+				"+491600000003",new Adresse("Friedrich-Ebert-Strasse 50", "27570 ", "Bremerhaven"),
 				 new Kreditkarte(Kreditkartentyp.AMEX, "1234567892", new GregorianCalendar(2026, 3, 15).getTime(), "Kajiman Chongbang"),  new Benutzer("chongbang", "123",
 						Rolle.KUNDE)));
 		em.persist(new Kunde(Anrede.HERR, "Malte", "Bothen", new GregorianCalendar(1999, 4, 21).getTime(),
-				"+491600000004",new Adresse("Friedrich-Eber-Strasse 51", "27570 ", "Bremerhaven"),
+				"+491600000004",new Adresse("Friedrich-Ebert-Strasse 51", "27570 ", "Bremerhaven"),
 				 new Kreditkarte(Kreditkartentyp.AMEX, "1234567893", new GregorianCalendar(2023, 3, 15).getTime(), "Malte Bothen"),  new Benutzer("bothen", "123",
 						Rolle.KUNDE)));	
 		em.persist(new Kunde(Anrede.HERR, "Finn", "Stein", new GregorianCalendar(1995, 6, 15).getTime(),
