@@ -70,6 +70,7 @@ body {
 				</h:panelGrid>
 				<hr />
 				<h:panelGrid>
+					<h2>Kreditkartendaten</h2>
 					<h:outputLabel value="Kreditkartenyp" for="typ" />
 					<h:panelGroup styleClass="col-2">
 						<h:selectOneMenu id="typ"
@@ -79,7 +80,6 @@ body {
 								itemValue="#{form}" itemLabel="#{form.label}" />
 						</h:selectOneMenu>
 					</h:panelGroup>
-					<h1>Kreditkartendaten</h1>
 					<h:outputLabel value="Nummer" for="nummer" />
 					<h:panelGroup styleClass="col-2">
 						<h:inputText id="nummer" required="true"
@@ -105,6 +105,7 @@ body {
 					</h:panelGroup>
 				</h:panelGrid>
 				<hr />
+				<h2>Adresse</h2>
 				<h:panelGrid columns="2" headerClass="header" footerClass="footer">
 					<h:outputLabel value="Straße:" for="strasse" />
 					<h:panelGroup>
