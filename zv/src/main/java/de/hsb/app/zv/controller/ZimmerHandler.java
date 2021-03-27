@@ -1,6 +1,8 @@
 package de.hsb.app.zv.controller;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -29,6 +31,13 @@ import javax.transaction.SystemException;
 import javax.transaction.Transactional;
 import javax.transaction.UserTransaction;
 
+import org.apache.commons.io.IOUtils;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
+import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.font.PDFont;
+import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
 import de.hsb.app.zv.model.Benutzer;
 import de.hsb.app.zv.model.Kunde;
 import de.hsb.app.zv.model.Reservierung;
@@ -51,7 +60,7 @@ public class ZimmerHandler implements Serializable {
 	private DataModel<Reservierung> reservierungen;
 	private Reservierung reservierung = new Reservierung();
 
-	private static final String FILENAME = "rechnung.pdf";
+	private static final String FILENAME = "reservierung.pdf";
     private static final String CONTENT_TYPE = "application/pdf";
     private Date date = new Date();
 	
@@ -212,12 +221,141 @@ public class ZimmerHandler implements Serializable {
 		}
 	}
 
-	public void importToPdf(List<Reservierung> reserv) {
+	public void importToPdf() throws IOException {
 		
-		System.out.print("import");
-		/*for(Reservierung res: reserv) {
-			
-		}*/
+		HttpSession session = SessionUtils.getSession();
+		merkeKunde = (Kunde) session.getAttribute("kunde");
+		UUID id = merkeKunde.getkId();
+		Query query = em.createNamedQuery("SelectOnlyMy");
+		query.setParameter(1, id);
+		reservierungen = new ListDataModel<>();
+		reservierungen.setWrappedData(query.getResultList());
+		
+		
+		
+		FacesContext fc = FacesContext.getCurrentInstance();
+	    ExternalContext ec = fc.getExternalContext();
+		
+	    
+	    PDDocument document = new PDDocument();
+		PDPage page = new PDPage();
+		document.addPage( page );
+		
+		PDFont fontR = PDType1Font.TIMES_ROMAN;
+		PDFont fontB = PDType1Font.HELVETICA_BOLD;
+		
+		
+		
+		PDPageContentStream contentStream = new PDPageContentStream(document, page);
+		
+		contentStream.beginText();
+		contentStream.setFont( fontR, 13 );
+		contentStream.setLeading(13);
+		contentStream.newLineAtOffset( 60, 660 );
+		contentStream.showText(merkeKunde.getAnrede() + " " + merkeKunde.getVorname() + " " + merkeKunde.getNachname());
+		
+		contentStream.newLine();
+		contentStream.showText(merkeKunde.getAdresse().getStrasse());
+		
+		contentStream.newLine();
+		contentStream.showText(merkeKunde.getAdresse().getPlz() + " " + merkeKunde.getAdresse().getOrt());
+		contentStream.endText();
+		
+		contentStream.beginText();
+		contentStream.setFont(fontB, 10);
+		contentStream.setLeading(13);
+		contentStream.newLineAtOffset(400, 640);
+		contentStream.showText("Kontakt:");
+
+		contentStream.setFont(fontR, 10);
+		contentStream.setNonStrokingColor(134, 136, 138);
+		contentStream.newLine();
+		contentStream.showText("An der Karlstadt 8");
+		
+		contentStream.newLine();
+		contentStream.showText("27568 Bremerhaven");
+		
+		contentStream.newLine();
+		contentStream.showText("Tel. + 49 6171 / 000001");
+
+
+		contentStream.newLine();
+		contentStream.showText("Fax. + 49 6171 / 000002");
+		
+		contentStream.newLine();
+		contentStream.showText("mobil + 49 160 123 456 79");
+		
+		contentStream.setLeading(14);
+		
+		contentStream.setFont(fontR, 12);
+		contentStream.setNonStrokingColor(0, 0, 0);
+		contentStream.newLine();
+		contentStream.showText("Datum:" + formatter.format(getDate()));
+		
+		contentStream.newLine();
+		contentStream.showText("Rechnungs-Nr.: 000001" );
+		
+		contentStream.newLine();
+		contentStream.showText("Kunden-Nr.: 0001");
+		contentStream.endText();
+		
+		contentStream.beginText();
+		contentStream.setFont( fontB, 20 );
+		contentStream.setLeading(20);
+		contentStream.newLineAtOffset( 60, 510 );
+		contentStream.showText( "Ihre Reservierung" );
+		
+		contentStream.endText();
+		
+		contentStream.beginText();
+		contentStream.setFont(fontR, 13);
+		contentStream.setLeading(13);
+		contentStream.newLineAtOffset( 60, 470 );
+		contentStream.showText("Zimmertyp                    ");
+		contentStream.showText("Von              ");
+		contentStream.showText("Bis              ");
+		contentStream.showText("Bettenanzahl            ");
+		contentStream.newLine();
+		for(Reservierung res: reservierungen) {
+			contentStream.showText(res.getZimmer().getZimmerTyp() + "     ");
+			contentStream.showText(res.getVon() + "     ");
+			contentStream.showText(res.getBis() + "     ");
+			contentStream.showText(res.getZimmer().getBetten() + "     ");
+			contentStream.newLine();
+		}
+		
+		contentStream.endText();
+		
+		
+		contentStream.close();
+		
+		document.save( "reserv.pdf");
+	
+	    document.close();
+	    
+	 
+	    
+	    FileInputStream inStream = new FileInputStream("reserv.pdf");
+	    
+	    ec.responseReset(); 
+	    ec.setResponseContentType(CONTENT_TYPE); 
+	    ec.setResponseHeader("Content-Disposition", "attachment; filename=\"" + FILENAME + "\""); 
+	    
+	    OutputStream output = ec.getResponseOutputStream();
+	    
+	    byte[] buffer = new byte[4096];
+        int bytesRead = -1;
+         
+        while ((bytesRead = inStream.read(buffer)) != -1) {
+            output.write(buffer, 0, bytesRead);
+        }
+
+        inStream.close();
+	    fc.responseComplete(); 
+		
+		
+		//System.out.print("import");
+		
 	}
 	
 	
@@ -295,6 +433,14 @@ public class ZimmerHandler implements Serializable {
 
 	public void setFilteredReservierungen(List<Reservierung> filteredReservierungen) {
 		this.filteredReservierungen = filteredReservierungen;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 }

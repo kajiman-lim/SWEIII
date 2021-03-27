@@ -77,6 +77,8 @@ table {
 			</h:form>
 			<h:form>
 				<h:commandButton action="#{zimmerHandler.back()}" value="Zurück" />
+				<h:commandButton styleClass="button"
+						action="#{zimmerHandler.importToPdf()}" value="Reservierung" />
 			</h:form>
 		</ui:insert>
 	</div>
