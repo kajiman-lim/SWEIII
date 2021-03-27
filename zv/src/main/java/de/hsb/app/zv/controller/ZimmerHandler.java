@@ -2,6 +2,7 @@ package de.hsb.app.zv.controller;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -50,6 +51,12 @@ public class ZimmerHandler implements Serializable {
 	private DataModel<Reservierung> reservierungen;
 	private Reservierung reservierung = new Reservierung();
 
+	private static final String FILENAME = "rechnung.pdf";
+    private static final String CONTENT_TYPE = "application/pdf";
+    private Date date = new Date();
+	
+	SimpleDateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+	
 	@PersistenceContext(name = "zv-persistence-unit")
 	private EntityManager em;
 	@Resource
@@ -209,6 +216,15 @@ public class ZimmerHandler implements Serializable {
 		}
 	}
 
+	public void importToPdf(List<Reservierung> reserv) {
+		
+		System.out.print("import");
+		/*for(Reservierung res: reserv) {
+			
+		}*/
+	}
+	
+	
 	public LocalDateTime today() {
 		return LocalDateTime.now();
 	}

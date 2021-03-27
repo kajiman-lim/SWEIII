@@ -55,10 +55,10 @@
 						value="#{kundenHandler.merkeUser.password}" />
 				</h:panelGroup>
 				<f:facet name="footer">
-					<div class="center">
-						<h:commandButton styleClass="button"
-							action="#{kundenHandler.neu()}" value="Registrieren" />
-					</div>
+					<h:commandButton styleClass="button" id="left"
+						action="#{kundenHandler.neu()}" value="Registrieren" />
+					<h:button styleClass="button" id="right"
+						outcome="login.xhtml" value="Zur Anmeldung" />
 				</f:facet>
 			</p:panelGrid>
 		</h:form>

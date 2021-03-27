@@ -22,6 +22,12 @@ body {
 	height: 70px;
 	padding:10px;
 }
+#left{
+	float:left;
+}
+#right{
+	float:right;
+}
 #content{
 	padding:5px;
 	width:100%;
