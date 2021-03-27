@@ -1,7 +1,7 @@
 package de.hsb.app.zv.model;
 
 public enum Anrede {
-	HERR("Herr"), FRAU("Frau"), FIRMA("Firma");	
+	HERR("Herr"), FRAU("Frau");	
 	private final String label;
 	private Anrede(String label) {
 		this.label = label;

@@ -119,20 +119,24 @@ public class ZimmerHandler implements Serializable {
 		merkeKunde = (Kunde) session.getAttribute("kunde");
 		Date currentDate = new Date();
 		Date checkIn = reservierung.getVon();
-		Date checkOut = reservierung.getBis();
-		reservierung = new Reservierung(currentDate, checkIn, checkOut, merkeKunde, merkeZimmer,
+		Date checkOut =reservierung.getBis();
+		reservierung = new Reservierung(currentDate,checkIn, checkOut, merkeKunde, merkeZimmer,
 				ReservierungStatus.RSRVD);
 		reservierung = em.merge(reservierung);
 		em.persist(reservierung);
-		reservierungen.setWrappedData(em.createNamedQuery("SelectReservierung").getResultList());
 		searchZimmer();
-		return "kundenSeite.xhtml";
+		return "kundenSeite";
 	}
 
 	@Transactional
 	public void searchZimmer() {
 		Date checkIn = reservierung.getVon();
 		Date checkOut = reservierung.getBis();
+		if(checkOut.before(checkIn) || checkOut.equals(checkIn)) {
+			searchedZimmer = new ListDataModel<>();
+			searchedZimmer.setWrappedData(em.createNamedQuery("SelectNull").getResultList());		
+			return;
+		}
 		Query query = em.createNamedQuery("SearchZimmer");
 		query.setParameter(1, checkIn);
 		query.setParameter(2, checkOut);

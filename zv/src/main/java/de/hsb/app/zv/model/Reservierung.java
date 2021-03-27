@@ -1,5 +1,6 @@
 package de.hsb.app.zv.model;
 
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -28,7 +29,7 @@ public class Reservierung{
 	private Date von;
 	@Temporal(TemporalType.DATE)
 	private Date bis;
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date am;
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "kunde_id", nullable = true)
@@ -39,7 +40,7 @@ public class Reservierung{
 	private ReservierungStatus status;
 	
 	public Reservierung() {}
-	public Reservierung(Date am,Date von, Date bis, Kunde kunde, Zimmer zimmer,ReservierungStatus status) {
+	public Reservierung(Date am, Date von, Date bis, Kunde kunde, Zimmer zimmer,ReservierungStatus status) {
 		this.am = am;
 		this.von = von;
 		this.bis = bis;
