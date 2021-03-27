@@ -12,8 +12,8 @@ import javax.persistence.NamedQuery;
 
 @FacesConfig
 @NamedQuery(name="SelectZimmer", query="Select z from Zimmer z")
-@NamedQuery(name = "SearchZimmer", query = "SELECT z FROM Zimmer z LEFT OUTER JOIN Reservierung r ON z.id=r.zimmer WHERE ((r.von not between ?1 and ?2) or r.von = null) AND ((r.bis not between ?1 and ?2) or r.bis = null)")
-//@NamedQuery(name = "SearchZimmer", query = "SELECT z FROM Zimmer z LEFT OUTER JOIN Reservierung r ON z.id=r.zimmer WHERE ((r.von > ?1) or r.von = null) OR ((r.bis < ?2) or r.bis = null)")
+//@NamedQuery(name = "SearchZimmer", query = "SELECT z FROM Zimmer z LEFT OUTER JOIN Reservierung r ON z.id=r.zimmer WHERE ((r.von not between ?1 and ?2) or r.von = null) AND ((r.bis not between ?1 and ?2) or r.bis = null)")
+@NamedQuery(name = "SearchZimmer", query = "SELECT z FROM Zimmer z WHERE NOT EXISTS(SELECT r FROM Reservierung r WHERE r.zimmer=z.id AND ((r.von BETWEEN ?1 AND ?2) OR (r.bis BETWEEN ?1 AND ?2)))")
 
 @NamedQuery(name="SelectNull", query="Select z FROM Zimmer z WHERE 0 != 0")
 @Entity
